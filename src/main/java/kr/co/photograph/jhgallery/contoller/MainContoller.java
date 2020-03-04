@@ -1,10 +1,17 @@
 package kr.co.photograph.jhgallery.contoller;
 
+import kr.co.photograph.jhgallery.service.EmailServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 @Controller
@@ -54,4 +61,30 @@ public class MainContoller {
         return "portfolio";
     }
 
+    @Autowired
+    JavaMailSender javaMailSender;
+
+//    @RequestMapping(value = "sendmail", method = RequestMethod.POST)
+//    public String sendMail (HttpServletRequest req) {
+//        EmailServiceImpl es = new EmailServiceImpl();
+//        es.setJavaMailSender(javaMailSender);
+//        es.sendSimpleMessage("eemail", "subject", "text", "amapow25@gmail.com");
+//        return "contact";
+//    }
+
+    @RequestMapping(value = "sendmail", method = RequestMethod.POST)
+    public String sendMail(String name, String eemail, String subject, String text) {
+        final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+                helper.setFrom(eemail);
+                helper.setTo("amapow25@gmail.com");
+                helper.setSubject(subject + " from" + name);
+                helper.setText(text);
+            }
+        };
+        javaMailSender.send(preparator);
+        return "contact";
+    }
 }

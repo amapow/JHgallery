@@ -172,24 +172,25 @@
                                                 </div>
                                             </li>
                                         </ul>
-
+                                    <form method = "POST" action = sendmail>
                                         <div class="mt75 row justify-content-center">
                                             <div class="col-lg-6 col-12">
-                                                <input type="text" placeholder="Name" class="form-control">
+                                                <input name="name" type="text" placeholder="Name" class="form-control">
                                             </div>
                                             <div class="col-lg-6 col-12">
-                                                <input type="email" placeholder="E-Mail" class="form-control">
+                                                <input name="eemail" type="email" placeholder="E-Mail" class="form-control">
                                             </div>
                                             <div class="col-12">
-                                                <input type="text" placeholder="Subject" class="form-control">
+                                                <input name="subject" type="text" placeholder="Subject" class="form-control">
                                             </div>
                                             <div class="col-12">
-                                                <textarea  placeholder="Massage" class="form-control" cols="4" rows="4"></textarea>
+                                                <textarea name="text" placeholder="Massage" class="form-control" cols="4" rows="4"></textarea>
                                             </div>
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary">Send</button>
+                                                <button name="sendmail" value = "sendmail" type="mail" class="btn btn-primary">Send</button>
                                             </div>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
