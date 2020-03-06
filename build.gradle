@@ -49,9 +49,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-task print() {
-    doLast {
-        println "Github push complete"
-    }
-}
