@@ -1984,7 +1984,7 @@ img {
   position: relative;
   overflow: hidden;
   margin: 0 auto;
-  cursor: crosshair;
+  /*cursor: crosshair;*/
   -webkit-transition: all ease-in-out 0.4s;
   transition: all ease-in-out 0.4s;
 }
@@ -2050,19 +2050,19 @@ img {
   -webkit-transition: all ease-in-out 0.4s;
   transition: all ease-in-out 0.4s;
 }
-.project_box_one:hover .product_info {
-  opacity: 1;
-}
-.project_box_one:hover .product_info .product_info_text_inner h4 {
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-  opacity: 1;
-}
-.project_box_one:hover .product_info .product_info_text_inner i {
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-  opacity: 1;
-}
+/*.project_box_one:hover .product_info {*/
+/*  opacity: 1;*/
+/*}*/
+/*.project_box_one:hover .product_info .product_info_text_inner h4 {*/
+/*  -webkit-transform: translateY(0);*/
+/*  transform: translateY(0);*/
+/*  opacity: 1;*/
+/*}*/
+/*.project_box_one:hover .product_info .product_info_text_inner i {*/
+/*  -webkit-transform: translateY(0);*/
+/*  transform: translateY(0);*/
+/*  opacity: 1;*/
+/*}*/
 
 .mfp-title {
   text-align: left;
