@@ -1,4 +1,4 @@
-package kr.co.photograph.jhgallery;
+package kr.co.photograph.jhgallery.config;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import java.util.Properties;
 @Component
 @PropertySource("classpath:mail.properties")
 
-public class Config {
+public class MailConfig {
     Properties pt = new Properties();
 
     @Value("${mail.smtp.port}")
