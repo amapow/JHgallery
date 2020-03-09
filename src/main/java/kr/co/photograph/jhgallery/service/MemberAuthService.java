@@ -34,13 +34,13 @@ public class MemberAuthService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userID) throws UsernameNotFoundException {
-        Optional<MemberEntity> userEntityWrapper = memberRepository.findByID(userID);
+    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+        Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(userEmail);
         MemberEntity userEntity = userEntityWrapper.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if (("admin@example.com").equals(userID)) {
+        if (("admin@example.com").equals(userEmail)) {
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
         }
 

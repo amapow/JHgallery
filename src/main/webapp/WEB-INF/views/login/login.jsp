@@ -40,14 +40,15 @@
     <div class="loader-outter"></div>
     <div class="loader-inner"></div>
 </div>
-<form action="admin/loginPost" method="post" id="loginForm">
-    <div class="form-group label-floating">
-        <label class="content_label">아이디</label><input name="userEmail" type="text" id="exampleInputEmail1" class="form-control" value="${cookie.rememberID.value}">
-    </div>
-    <div class="form-group label-floating">
-        <label class="control-label">비밀번호</label> <input name="userPwd" type="password" id="exampleInputPassword1" class="form-control"></label>
-    </div>
-    <button type="submit" class="btn btn-default">로그인</button>
+<h1>로그인</h1>
+<hr>
+
+<form action="/login" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+    <input type="text" name="username" placeholder="이메일 입력해주세요">
+    <input type="password" name="password" placeholder="비밀번호">
+    <button type="submit">로그인</button>
 </form>
 
 <!-- jquery -->

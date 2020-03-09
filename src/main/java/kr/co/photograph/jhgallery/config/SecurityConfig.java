@@ -34,20 +34,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // 페이지 권한 설정
-                .antMatchers("/admin/**").hasRole("Admin")
-                .antMatchers("/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
             .and() // 로그인 설정
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/login/result")
+                .loginPage("/login/login")
+                .defaultSuccessUrl("/login/login/result")
                 .permitAll()
             .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/user/logout/result")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/login/logout"))
+                .logoutSuccessUrl("/login/logout/result")
                 .invalidateHttpSession(true)
             .and()
-                .exceptionHandling().accessDeniedPage("/user/denied");
+                .exceptionHandling().accessDeniedPage("/login/denied");
     }
 
     @Override

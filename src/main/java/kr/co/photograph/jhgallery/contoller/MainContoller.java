@@ -64,14 +64,6 @@ public class MainContoller {
     @Autowired
     JavaMailSender javaMailSender;
 
-//    @RequestMapping(value = "sendmail", method = RequestMethod.POST)
-//    public String sendMail (HttpServletRequest req) {
-//        EmailServiceImpl es = new EmailServiceImpl();
-//        es.setJavaMailSender(javaMailSender);
-//        es.sendSimpleMessage("eemail", "subject", "text", "amapow25@gmail.com");
-//        return "contact";
-//    }
-
     @RequestMapping(value = "sendmail", method = RequestMethod.POST)
     public String sendMail(String name, String eemail, String subject, String text) {
         final MimeMessagePreparator preparator = new MimeMessagePreparator() {

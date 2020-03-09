@@ -81,6 +81,11 @@
                             Contact
                         </a>
                     </li>
+                    <li>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">
+                            Admin
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!--main menu end -->
@@ -111,7 +116,7 @@
                     </ul>
                     <div class="copy_right">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <p class="copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script>, Janghyeon Jung All rights reserved</br>with <a href="admin/login" target="_blank">Colorlib</a></p>
+                        <p class="copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script>, <a href="login" >Janghyeon Jung</a> All rights reserved</br>with Colorlib</p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                 </div>
@@ -303,6 +308,11 @@
         </div>
         <!--=================== content body end ====================-->
     </div>
+    <div><a sec:authorize="isAnonymous()" th:href="@{/login}">login</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/signup}">signup</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">admin</a></div>
+
 </div>
 
 
