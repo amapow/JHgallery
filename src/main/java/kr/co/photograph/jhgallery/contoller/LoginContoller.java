@@ -1,52 +1,48 @@
 package kr.co.photograph.jhgallery.contoller;
 
 import kr.co.photograph.jhgallery.domain.dto.MemberDto;
-import kr.co.photograph.jhgallery.service.MemberAuthService;
+import kr.co.photograph.jhgallery.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.Locale;
 
 
 @Controller
 @AllArgsConstructor
 public class LoginContoller {
-    private MemberAuthService memberAuthService;
+    private MemberService memberService;
 
-    @GetMapping("/login")
+    @GetMapping("/user/login")
     public String dispLogin() {
-        return "/login/login";
+        return "user/login";
     }
 
-    @GetMapping("/signup")
+    @GetMapping("/user/signup")
     public String dispSignup() {
-        return "/login/signup";
+        return "/user/signup";
     }
 
     @PostMapping("/signup/exec")
     public String execSignup(MemberDto memberDto) {
-        memberAuthService.joinUser(memberDto);
-        return "redirect:/login";
+        memberService.joinUser(memberDto);
+        return "redirect:/user/login";
     }
 
-    @GetMapping("/login/result")
+    @GetMapping("/user/login/result")
     public String dispLoginResult() {
-        return "/login/loginSuccess";
+        return "/user/loginSuccess";
     }
 
-    @GetMapping("/logout/result")
+    @GetMapping("/user/logout/result")
     public String dispLogout() {
-        return "/login/logout";
+        return "/user/logout";
     }
 
-    @GetMapping("/login/denied")
+    @GetMapping("/user/denied")
     public String dispDenied() {
-        return "/login/denied";
+        return "/user/denied";
     }
 
     @RequestMapping(value="/admin")

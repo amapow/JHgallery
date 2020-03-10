@@ -7,12 +7,17 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Properties;
 
 
 @Component
 @PropertySource("classpath:mail.properties")
+
+@Controller
+@RequestMapping("/")
 
 public class MailConfig {
     Properties pt = new Properties();
@@ -46,8 +51,6 @@ public class MailConfig {
         javaMailSender.setDefaultEncoding("UTF-8");
         return javaMailSender;
     }
-
-
 }
 
 

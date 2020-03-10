@@ -13,15 +13,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import kr.co.photograph.jhgallery.domain.Role;
-
 import javax.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class MemberAuthService implements UserDetailsService {
+public class MemberService implements UserDetailsService {
     private MemberRepository memberRepository;
 
     @Transactional

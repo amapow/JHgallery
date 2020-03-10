@@ -1,6 +1,6 @@
 package kr.co.photograph.jhgallery.config;
 
-import kr.co.photograph.jhgallery.service.MemberAuthService;
+import kr.co.photograph.jhgallery.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private MemberAuthService memberAuthService;
+    private MemberService memberService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -35,23 +35,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/**").permitAll()
             .and() // 로그인 설정
                 .formLogin()
-                .loginPage("/login/login")
-                .defaultSuccessUrl("/login/login/result")
+                .loginPage("/user/login.jsp")
+                .defaultSuccessUrl("/user/login.jsp/result")
                 .permitAll()
             .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/login/logout"))
-                .logoutSuccessUrl("/login/logout/result")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                .logoutSuccessUrl("/user/logout/result")
                 .invalidateHttpSession(true)
             .and()
-                .exceptionHandling().accessDeniedPage("/login/denied");
+                .exceptionHandling().accessDeniedPage("/user/denied");
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberAuthService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
     }
 
 }

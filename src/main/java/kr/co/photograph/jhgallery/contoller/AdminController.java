@@ -13,10 +13,10 @@
 //@RequestMapping("/")
 //public class AdminController {
 //
-////    @RequestMapping(value = "admin/login", method = RequestMethod.GET)
+////    @RequestMapping(value = "admin/login.jsp", method = RequestMethod.GET)
 ////    public String InsertAdmin(Locale locale, Model model) {
-////        model.addAttribute("admin/login", "admin/login");
-////        return "admin/login";
+////        model.addAttribute("admin/login.jsp", "admin/login.jsp");
+////        return "admin/login.jsp";
 ////    }
 ////
 ////    @RequestMapping(value = "admin/admin", method = RequestMethod.GET)
