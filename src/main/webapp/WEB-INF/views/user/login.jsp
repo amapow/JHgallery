@@ -1,3 +1,4 @@
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: janghyeon
@@ -43,11 +44,14 @@
 <h1>로그인</h1>
 <hr>
 
-<form action="/login" method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-
-    <input type="text" name="username" placeholder="이메일 입력해주세요">
-    <input type="password" name="password" placeholder="비밀번호">
+<form action="/user/login" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    <label>
+        <input type="text" name="username" placeholder="이메일 입력해주세요">
+    </label>
+    <label>
+        <input type="password" name="password" placeholder="비밀번호">
+    </label>
     <button type="submit">로그인</button>
 </form>
 

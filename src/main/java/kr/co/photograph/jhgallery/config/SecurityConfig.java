@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
             .and() // 로그인 설정
                 .formLogin()
-                .loginPage("/user/login.jsp")
-                .defaultSuccessUrl("/user/login.jsp/result")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/login/result")
                 .permitAll()
             .and()
                 .logout()

@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -25,5 +24,6 @@ public class MemberEntity {
         this.id = id;
         this.email = email;
         this.password = password;
+        System.out.println(this.id + this.email + this.password);
     }
 }

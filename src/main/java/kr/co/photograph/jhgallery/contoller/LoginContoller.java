@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -14,17 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginContoller {
     private MemberService memberService;
 
-    @GetMapping("/user/login")
-    public String dispLogin() {
-        return "user/login";
-    }
+//    @GetMapping("/user/login")
+//    public String dispLogin() {
+//        return "/user/login";
+//    }
 
     @GetMapping("/user/signup")
     public String dispSignup() {
         return "/user/signup";
     }
 
-    @PostMapping("/signup/exec")
+    @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
     public String execSignup(MemberDto memberDto) {
         memberService.joinUser(memberDto);
         return "redirect:/user/login";

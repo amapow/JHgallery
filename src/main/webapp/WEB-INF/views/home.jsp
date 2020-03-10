@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="kr" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<html lang="kr">
 <head>
     <!-- ========== Meta Tags ========== -->
     <meta charset="UTF-8">
@@ -82,9 +83,9 @@
                         </a>
                     </li>
                     <li>
-                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">
-                            Admin
-                        </a>
+                        <sec:authorize access = "hasRole('ROLE_ADMIN')">
+                            <a href = /admin>Admin</a>
+                        </sec:authorize>
                     </li>
                 </ul>
             </div>
@@ -309,15 +310,18 @@
         <!--=================== content body end ====================-->
     </div>
 </div>
-
-<h1>
-    메인
-</h1>
-<a sec:authorize="isAnonymous()" th:href="@{user/login}">login</a>
-<a sec:authorize="isAuthenticated()" th:href="@{user/logout}">logout</a>
-<a sec:authorize="isAnonymous()" th:href="@{/user/signup}">signup</a>
-<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/admin}">admin</a>
-
+<sec:authorize access="isAnonymous()">
+    <a href = /login>login</a>
+</sec:authorize>
+<sec:authorize access ="isAuthenticated()">
+    <a href = /user/logout>logout</a>
+</sec:authorize>
+<sec:authorize access ="isAnonymous()">
+    <a href=/user/signup>signup</a>
+</sec:authorize>
+<sec:authorize access = "hasRole('ROLE_ADMIN')">
+    <a href = /admin>admin</a>
+</sec:authorize>
 <!-- jquery -->
 <script src="assets/js/jquery.min.js"></script>
 <!-- bootstrap -->
