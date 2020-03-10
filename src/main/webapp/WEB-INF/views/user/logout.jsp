@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=/">
+    <title>Janghyeon Jung</title>
 </head>
 <body>
-
+<script>
+    alert("로그아웃 되었습니다.")
+</script>
 </body>
 </html>

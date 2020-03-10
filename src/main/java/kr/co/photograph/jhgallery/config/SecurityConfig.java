@@ -43,12 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
             .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/user/logout/result")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/logout/result")
                 .invalidateHttpSession(true)
             .and()
-                .exceptionHandling().accessDeniedPage("/user/denied");
-    }
+                .exceptionHandling().accessDeniedPage("/denied");
+}
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

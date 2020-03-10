@@ -28,20 +28,20 @@ public class LoginContoller {
     @RequestMapping(value = "/user/signup", method = RequestMethod.POST)
     public String execSignup(MemberDto memberDto) {
         memberService.joinUser(memberDto);
-        return "redirect:/user/login";
+        return "redirect:/login";
     }
 
-    @GetMapping("/user/login/result")
+    @GetMapping("/login/result")
     public String dispLoginResult() {
         return "/user/loginSuccess";
     }
 
-    @GetMapping("/user/logout/result")
+    @GetMapping("/logout/result")
     public String dispLogout() {
         return "/user/logout";
     }
 
-    @GetMapping("/user/denied")
+    @GetMapping("/denied")
     public String dispDenied() {
         return "/user/denied";
     }

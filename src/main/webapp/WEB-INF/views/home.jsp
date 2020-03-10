@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%--<%@ taglib prefix="sec" uri="http://java.sun.com/jsp/jstl/core"%>--%>
 <html lang="kr">
 <head>
     <!-- ========== Meta Tags ========== -->
@@ -117,7 +118,18 @@
                     </ul>
                     <div class="copy_right">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <p class="copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script>, <a href="/user/login" >Janghyeon Jung</a> All rights reserved</br>with Colorlib</p>
+                        <p class="copyright">Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>,
+                            <sec:authorize access="isAnonymous()">
+                                <a href = /login>Janghyeon Jung</a>
+                            </sec:authorize>
+                            <sec:authorize access ="isAuthenticated()">
+                                <a href = /logout>Janghyeon Jung</a>
+                            </sec:authorize>
+                            All rights reserved</br>with Colorlib
+                        </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                 </div>
@@ -310,18 +322,6 @@
         <!--=================== content body end ====================-->
     </div>
 </div>
-<sec:authorize access="isAnonymous()">
-    <a href = /login>login</a>
-</sec:authorize>
-<sec:authorize access ="isAuthenticated()">
-    <a href = /user/logout>logout</a>
-</sec:authorize>
-<sec:authorize access ="isAnonymous()">
-    <a href=/user/signup>signup</a>
-</sec:authorize>
-<sec:authorize access = "hasRole('ROLE_ADMIN')">
-    <a href = /admin>admin</a>
-</sec:authorize>
 <!-- jquery -->
 <script src="assets/js/jquery.min.js"></script>
 <!-- bootstrap -->

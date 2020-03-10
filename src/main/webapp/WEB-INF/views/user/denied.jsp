@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>접근 거부</title>
+    <title>Janghyeon Jung</title>
+    <meta http-equiv="refresh" content="0; url=/">
 </head>
 <body>
-    <h1>접근 거부 페이지</h1>
+    <script>
+        alert("권한이 없습니다.")
+    </script>
+
 </body>
 </html>

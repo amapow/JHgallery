@@ -15,6 +15,7 @@
 <hr>
 
 <form action="/user/signup" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="text" name="email" placeholder="이메일 입력해주세요">
     <input type="password" name="password" placeholder="비밀번호">
     <button type="submit">가입하기</button>
