@@ -51,6 +51,13 @@ dependencies {
     implementation 'org.springframework.security:spring-security-taglibs'
     runtimeOnly 'mysql:mysql-connector-java'
 
+    // Cookies
+    compile 'org.springframework.session:spring-session-core'
+
+    // flickr4java
+    compile 'com.flickr4java:flickr4java:3.0.2'
+    compile 'com.github.scribejava:scribejava-apis'
+
 }
 
 test {
