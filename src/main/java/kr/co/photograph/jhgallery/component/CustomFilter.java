@@ -38,7 +38,7 @@ public class CustomFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse resp = (HttpServletResponse)response;
         resp.setHeader("Set-Cookie", "locale=kr; HttpOnly; SameSite=None");
-        resp.setHeader("X-Frame-Options", "ALLOW-FROM http://coo.kr");
+        resp.setHeader("X-Frame-Options", "ALLOW-FROM http://49.50.165.81/");
         chain.doFilter(request, response);
     }
 }
