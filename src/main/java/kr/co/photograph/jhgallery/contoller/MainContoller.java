@@ -1,10 +1,13 @@
 package kr.co.photograph.jhgallery.contoller;
 
+import kr.co.photograph.jhgallery.service.FlickrApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 @Controller
@@ -12,16 +15,38 @@ import java.util.Locale;
 @RequestMapping("/")
 public class MainContoller {
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String home_1(Locale locale, Model model) {
-        model.addAttribute("home", "home");
-        return "home";
+//    @RequestMapping(value = "", method = RequestMethod.GET)
+//    public String home_1(Locale locale, Model model) {
+//        model.addAttribute("home", "home");
+//        return "home";
+//    }
+//
+//    @RequestMapping(value = "home", method = RequestMethod.GET)
+//    public String home_2(Locale locale, Model model) {
+//        model.addAttribute("home", "home");
+//        return "home";
+//    }
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView home_1() throws Exception {
+        FlickrApi flick = new FlickrApi();
+        ArrayList<String> mediumPhotoList = flick.getImages("medium");
+        ArrayList<String> largePhotoList = flick.getImages("large");
+        ModelAndView photoModel = new ModelAndView("home");
+        photoModel.addObject("mediumModel", mediumPhotoList);
+        photoModel.addObject("largeModel", largePhotoList);
+        return photoModel;
     }
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
-    public String home_2(Locale locale, Model model) {
-        model.addAttribute("home", "home");
-        return "home";
+    public ModelAndView home_2() throws Exception {
+        FlickrApi flick = new FlickrApi();
+        ArrayList<String> mediumPhotoList = flick.getImages("medium");
+        ArrayList<String> largePhotoList = flick.getImages("large");
+        ModelAndView photoModel = new ModelAndView("home");
+        photoModel.addObject("mediumModel", mediumPhotoList);
+        photoModel.addObject("largeModel", largePhotoList);
+
+        return photoModel;
     }
 
     @RequestMapping(value = "about", method = RequestMethod.GET)

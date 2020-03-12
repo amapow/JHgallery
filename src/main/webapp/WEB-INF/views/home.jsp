@@ -1,3 +1,4 @@
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%--<%@ taglib prefix="sec" uri="http://java.sun.com/jsp/jstl/core"%>--%>
@@ -140,182 +141,212 @@
         <!--=================== side menu end====================-->
 
         <!--=================== content body ====================-->
+<%--        <div class="col-lg-10 col-md-9 col-12 body_block  align-content-center">--%>
+<%--            <div class="portfolio">--%>
+<%--                <div class="container-fluid">--%>
+<%--                    <!--=================== masaonry portfolio start====================-->--%>
+<%--&lt;%&ndash;                    <div class="grid img-container justify-content-center no-gutters">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item branding  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/1.jpg"> <!--title="project name 1">-->&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img src="assets/img/home/1.jpg"/><!-- alt="pro1" />-->&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <!--&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            -->&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item  branding architecture  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/2.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img src="assets/img/home/2.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <!--&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            -->&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item  design col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/3.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img src="assets/img/home/3.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <!--&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            -->&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item  photography design col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/4.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img src="assets/img/home/4.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item  branding photography  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/5.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img src="assets/img/home/5.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item   architecture design col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<!--                            <a href="https://live.staticflickr.com/4861/31204864377_e0ab400d9c_h.jpg">-->
+<%--                                <div class="project_box_one">--%>
+<%--                                    <img width="340px"; src="https://live.staticflickr.com/4861/31204864377_e0ab400d9c_h.jpg" alt="pro1" />--%>
+<%--                                    <div class="product_info">--%>
+<%--                                        <div class="product_info_text">--%>
+<!---->
+        <%--                                            <div class="product_info_text_inner">--%>
+<%--                                                <i class="ion ion-plus"></i>--%>
+<%--                                                <h4>project name</h4>--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item  photography architecture col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/7.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img src="assets/img/home/7.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item  branding design  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/8.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img src="assets/img/home/8.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="assets/img/home/9.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img width="340px"; src="assets/img/home/9.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        <div class="product_info_text">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            <div class="product_info_text_inner">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <i class="ion ion-plus"></i>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                                <h4>project name</h4>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                            </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;                                        </div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="https://live.staticflickr.com/1927/46191320502_776092f3c7_h.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img width="340px"; src="https://live.staticflickr.com/1927/46191320502_776092f3c7_h.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="https://live.staticflickr.com/4839/46007759942_d6d454bddd_h.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img width="340px"; src="https://live.staticflickr.com/4839/46007759942_d6d454bddd_h.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            <a href="https://live.staticflickr.com/4811/31204856837_a476326df4_h.jpg">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <div class="project_box_one">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <img width="340px"; src="https://live.staticflickr.com/4811/31204856837_a476326df4_h.jpg" alt="pro1" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <div class="product_info">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                    </div>&ndash;%&gt;--%>
+
+<%--                    <!--=================== masaonry portfolio end====================-->--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <div class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
             <div class="portfolio">
                 <div class="container-fluid">
-                    <!--=================== masaonry portfolio start====================-->
+                    <%
+                        {
+                            ArrayList<String> mediumList = (ArrayList<String>)request.getAttribute("mediumModel");
+                            ArrayList<String> largeList = (ArrayList<String>)request.getAttribute("largeModel");
+                    %>
                     <div class="grid img-container justify-content-center no-gutters">
                         <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
+                        <%
+                            for(int i = 0 ; i < mediumList.size() ; i++) {
+                        %>
                         <div class="grid-item branding  col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/1.jpg"> <!--title="project name 1">-->
+
+                            <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->
                                 <div class="project_box_one">
-                                    <img src="assets/img/home/1.jpg"/><!-- alt="pro1" />-->
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <!----%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                            -->--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item  branding architecture  col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/2.jpg">
-                                <div class="project_box_one">
-                                    <img src="assets/img/home/2.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <!----%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                            -->--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item  design col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/3.jpg">
-                                <div class="project_box_one">
-                                    <img src="assets/img/home/3.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <!----%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                            -->--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item  photography design col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/4.jpg">
-                                <div class="project_box_one">
-                                    <img src="assets/img/home/4.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item  branding photography  col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/5.jpg">
-                                <div class="project_box_one">
-                                    <img src="assets/img/home/5.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item   architecture design col-sm-12 col-md-6 col-lg-3">
-                            <a href="https://live.staticflickr.com/4861/31204864377_e0ab400d9c_h.jpg">
-                                <div class="project_box_one">
-                                    <img width="340px"; src="https://live.staticflickr.com/4861/31204864377_e0ab400d9c_h.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item  photography architecture col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/7.jpg">
-                                <div class="project_box_one">
-                                    <img src="assets/img/home/7.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item  branding design  col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/8.jpg">
-                                <div class="project_box_one">
-                                    <img src="assets/img/home/8.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">
-                            <a href="assets/img/home/9.jpg">
-                                <div class="project_box_one">
-                                    <img width="340px"; src="assets/img/home/9.jpg" alt="pro1" />
-                                    <div class="product_info">
-<%--                                        <div class="product_info_text">--%>
-<%--                                            <div class="product_info_text_inner">--%>
-<%--                                                <i class="ion ion-plus"></i>--%>
-<%--                                                <h4>project name</h4>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">
-                            <a href="https://live.staticflickr.com/1927/46191320502_776092f3c7_h.jpg">
-                                <div class="project_box_one">
-                                    <img width="340px"; src="https://live.staticflickr.com/1927/46191320502_776092f3c7_h.jpg" alt="pro1" />
+                                    <img src="<%out.print(mediumList.get(i));%>"/><!-- alt="pro1" />-->
                                     <div class="product_info">
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">
-                            <a href="https://live.staticflickr.com/4839/46007759942_d6d454bddd_h.jpg">
-                                <div class="project_box_one">
-                                    <img width="340px"; src="https://live.staticflickr.com/4839/46007759942_d6d454bddd_h.jpg" alt="pro1" />
-                                    <div class="product_info">
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="grid-item architecture  col-sm-12 col-md-6 col-lg-3">
-                            <a href="https://live.staticflickr.com/4811/31204856837_a476326df4_h.jpg">
-                                <div class="project_box_one">
-                                    <img width="340px"; src="https://live.staticflickr.com/4811/31204856837_a476326df4_h.jpg" alt="pro1" />
-                                    <div class="product_info">
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                        <%}}%>
                     </div>
-                    <!--=================== masaonry portfolio end====================-->
                 </div>
             </div>
         </div>

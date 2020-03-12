@@ -18,7 +18,7 @@ public class FlickrApi {
     String apikey = "055c7b929054f3e2a33e16344c946f54";
     String secret = "348f89836dcc91a7";
     String userId = "146330423@N07";
-    public PhotoList<Photo> searchByUserId() throws FlickrException {
+    private PhotoList<Photo> searchByUserId() throws FlickrException {
         Flickr flickr = new Flickr(apikey, secret, new REST());
         SearchParameters searchParameters = new SearchParameters();
         searchParameters.setUserId(userId);
