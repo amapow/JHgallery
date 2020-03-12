@@ -4,16 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.internet.MimeMessage;
 
+@Controller
+
 public class MailControler {
     @Autowired
     JavaMailSender javaMailSender;
 
-    @RequestMapping(value = "sendmail", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendmail", method = RequestMethod.POST)
     public String sendMail(String name, String eemail, String subject, String text) {
         final MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override
@@ -26,6 +29,6 @@ public class MailControler {
             }
         };
         javaMailSender.send(preparator);
-        return "contact";
+        return "/contact";
     }
 }

@@ -159,6 +159,7 @@
                                             </li>
                                         </ul>
                                     <form method = "POST" action = sendmail>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         <div class="mt75 row justify-content-center">
                                             <div class="col-lg-6 col-12">
                                                 <input name="name" type="text" placeholder="Name" class="form-control">
