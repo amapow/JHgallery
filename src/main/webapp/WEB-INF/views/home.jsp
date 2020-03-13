@@ -95,6 +95,14 @@
                             <a href = /admin>Admin</a>
                         </sec:authorize>
                     </li>
+                    <br>
+                    <br>
+                    <br>
+                    <li>
+                        <a href="contact">
+                            Contact
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!--main menu end -->
@@ -114,13 +122,7 @@
 
             <!--social and copyright -->
             <div class="side_menu_bottom">
-                <ul class="menu_nav">
-                <li>
-                    <a href="contact">
-                        Contact
-                    </a>
-                </li>
-                </ul>
+
                 <div class="side_menu_bottom_inner">
                     <ul class="social_menu">
                         <li>
