@@ -14,37 +14,29 @@ import java.util.Locale;
 
 @RequestMapping("/")
 public class MainContoller {
-
-//    @RequestMapping(value = "", method = RequestMethod.GET)
-//    public String home_1(Locale locale, Model model) {
-//        model.addAttribute("home", "home");
-//        return "home";
-//    }
-//
-//    @RequestMapping(value = "home", method = RequestMethod.GET)
-//    public String home_2(Locale locale, Model model) {
-//        model.addAttribute("home", "home");
-//        return "home";
-//    }
+    FlickrApi flick = new FlickrApi();
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView home_1() throws Exception {
-        FlickrApi flick = new FlickrApi();
-        ArrayList<String> mediumPhotoList = flick.getImages("medium");
-        ArrayList<String> largePhotoList = flick.getImages("large");
+        ArrayList<String> mediumPhotoList = flick.getImages("Medium");
+        ArrayList<String> largePhotoList = flick.getImages("Large");
+        ArrayList<String> titlePhotoList = flick.getImages("Title");
         ModelAndView photoModel = new ModelAndView("home");
         photoModel.addObject("mediumModel", mediumPhotoList);
         photoModel.addObject("largeModel", largePhotoList);
+        photoModel.addObject("titleModel", titlePhotoList);
+
         return photoModel;
     }
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
     public ModelAndView home_2() throws Exception {
-        FlickrApi flick = new FlickrApi();
-        ArrayList<String> mediumPhotoList = flick.getImages("medium");
-        ArrayList<String> largePhotoList = flick.getImages("large");
+        ArrayList<String> mediumPhotoList = flick.getImages("Medium");
+        ArrayList<String> largePhotoList = flick.getImages("Large");
+        ArrayList<String> titlePhotoList = flick.getImages("Title");
         ModelAndView photoModel = new ModelAndView("home");
         photoModel.addObject("mediumModel", mediumPhotoList);
         photoModel.addObject("largeModel", largePhotoList);
+        photoModel.addObject("titleModel", titlePhotoList);
 
         return photoModel;
     }

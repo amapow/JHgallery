@@ -19,13 +19,15 @@ import java.util.Locale;
 public class AdminController {
 
     @RequestMapping(value = "admin/imageSelector", method = RequestMethod.GET)
-    public ModelAndView mediumImageSelector() throws Exception {
+    public ModelAndView ImageSelector() throws Exception {
         FlickrApi flick = new FlickrApi();
-        ArrayList<String> mediumPhotoList = flick.getImages("medium");
-        ArrayList<String> largePhotoList = flick.getImages("large");
+        ArrayList<String> mediumPhotoList = flick.getImages("Medium");
+        ArrayList<String> largePhotoList = flick.getImages("Large");
+        ArrayList<String> titlePhotoList = flick.getImages("Title");
         ModelAndView photoModel = new ModelAndView("admin/imageSelector");
         photoModel.addObject("mediumModel", mediumPhotoList);
         photoModel.addObject("largeModel", largePhotoList);
+        photoModel.addObject("titleModel", titlePhotoList);
 
         return photoModel;
     }

@@ -75,6 +75,14 @@
                             <a href = /admin>Admin</a>
                         </sec:authorize>
                     </li>
+                    <div class="side_menu_section">
+                        <h4 class="side_title"><b>Project</b></h4>
+                        <ul  id="filtr-container"  class="filter_nav">
+                            <li data-filter=".Old man's cave"> <a href="javascript:void(0)">Old man's cave</a></li>
+                            <li data-filter=".The last romance in SEOUL"><a href="javascript:void(0)">The last romance in SEOUL</a></li>
+                            <li data-filter=".Untitled"><a href="javascript:void(0)">Untitled</a></li>
+                        </ul>
+                    </div>
                 </ul>
             </div>
             <!--main menu end -->
@@ -124,27 +132,29 @@
 <%--                    %>--%>
 <%--                    <img src="<%out.print(test.get(i));%>"/>--%>
 <%--                    <% }} %>--%>
-                    <%
-                        {
-                            ArrayList<String> mediumList = (ArrayList<String>)request.getAttribute("mediumModel");
-                            ArrayList<String> largeList = (ArrayList<String>)request.getAttribute("largeModel");
-                    %>
-                    <div class="grid img-container justify-content-center no-gutters">
-                        <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
-                        <%
-                            for(int i = 0 ; i < mediumList.size() ; i++) {
-                        %>
-                        <div class="grid-item branding  col-sm-12 col-md-6 col-lg-3">
+    <%
+        {
+            ArrayList<String> mediumList = (ArrayList<String>)request.getAttribute("mediumModel");
+            ArrayList<String> largeList = (ArrayList<String>)request.getAttribute("largeModel");
+            ArrayList<String> titleList = (ArrayList<String>)request.getAttribute("titleModel");
 
-                            <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->
-                                <div class="project_box_one">
-                                    <img src="<%out.print(mediumList.get(i));%>"/><!-- alt="pro1" />-->
-                                    <div class="product_info">
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <%}}%>
+    %>
+    <div class="grid img-container justify-content-center no-gutters">
+        <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
+        <%
+            for(int i = 0 ; i < mediumList.size() ; i++) {
+        %>
+        <div class="grid-item <%out.print(titleList.get(i));%> col-sm-12 col-md-6 col-lg-3">
+
+            <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->
+                <div class="project_box_one">
+                    <img src="<%out.print(mediumList.get(i));%>"/><!-- alt="pro1" />-->
+                    <div class="product_info">
+                    </div>
+                </div>
+            </a>
+        </div>
+        <%}}%>
                     </div>
                 </div>
             </div>

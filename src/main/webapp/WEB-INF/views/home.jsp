@@ -57,11 +57,20 @@
             <!--main menu -->
             <div class="side_menu_section">
                 <ul class="menu_nav">
-                    <li class="active">
+                    <li>
                         <a href="home">
-                            Home
+                            Archive
                         </a>
                     </li>
+                    <div class="side_menu_section">
+                        <h4 class="side_title"><b>Project</b></h4>
+                        <ul  id="filtr-container"  class="filter_nav">
+                            <li data-filter=".OMC"> <a href="javascript:void(0)">Old man's cave</a></li>
+                            <li data-filter=".TLR"><a href="javascript:void(0)">The last romance in SEOUL</a></li>
+                            <li data-filter=".NULL"><a href="javascript:void(0)">NULL</a></li>
+                            <li data-filter=".Untitled"><a href="javascript:void(0)">Untitled</a></li>
+                        </ul>
+                    </div>
 <%--                    <li>--%>
 <%--                        <a href="about">--%>
 <%--                            About Us--%>
@@ -79,11 +88,8 @@
                         </a>
                     </li>
                     -->
-                    <li>
-                        <a href="contact">
-                            Contact
-                        </a>
-                    </li>
+
+
                     <li>
                         <sec:authorize access = "hasRole('ROLE_ADMIN')">
                             <a href = /admin>Admin</a>
@@ -93,21 +99,28 @@
             </div>
             <!--main menu end -->
 
-            <!--filter menu -->
-            <div class="side_menu_section">
-                <h4 class="side_title">filter by:</h4>
-                <ul  id="filtr-container"  class="filter_nav">
-                    <li  data-filter="*" class="active"><a href="javascript:void(0)" >all</a></li>
-                    <li data-filter=".branding"> <a href="javascript:void(0)">branding</a></li>
-                    <li data-filter=".design"><a href="javascript:void(0)">design</a></li>
-                    <li data-filter=".photography"><a href="javascript:void(0)">photography</a></li>
-                    <li data-filter=".architecture"><a href="javascript:void(0)">architecture</a></li>
-                </ul>
-            </div>
-            <!--filter menu end -->
+<%--            <!--filter menu -->--%>
+<%--            <div class="side_menu_section">--%>
+<%--                <h4 class="side_title">filter by:</h4>--%>
+<%--                <ul  id="filtr-container"  class="filter_nav">--%>
+<%--                    <li  data-filter="*" class="active"><a href="javascript:void(0)" >all</a></li>--%>
+<%--                    <li data-filter=".branding"> <a href="javascript:void(0)">branding</a></li>--%>
+<%--                    <li data-filter=".design"><a href="javascript:void(0)">design</a></li>--%>
+<%--                    <li data-filter=".photography"><a href="javascript:void(0)">photography</a></li>--%>
+<%--                    <li data-filter=".architecture"><a href="javascript:void(0)">architecture</a></li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--            <!--filter menu end -->--%>
 
             <!--social and copyright -->
             <div class="side_menu_bottom">
+                <ul class="menu_nav">
+                <li>
+                    <a href="contact">
+                        Contact
+                    </a>
+                </li>
+                </ul>
                 <div class="side_menu_bottom_inner">
                     <ul class="social_menu">
                         <li>
@@ -317,8 +330,6 @@
 <%--&lt;%&ndash;                            </a>&ndash;%&gt;--%>
 <%--&lt;%&ndash;                        </div>&ndash;%&gt;--%>
 <%--&lt;%&ndash;                    </div>&ndash;%&gt;--%>
-
-<%--                    <!--=================== masaonry portfolio end====================-->--%>
 <%--                </div>--%>
 <%--            </div>--%>
 <%--        </div>--%>
@@ -329,13 +340,14 @@
                         {
                             ArrayList<String> mediumList = (ArrayList<String>)request.getAttribute("mediumModel");
                             ArrayList<String> largeList = (ArrayList<String>)request.getAttribute("largeModel");
+                            ArrayList<String> titleList = (ArrayList<String>)request.getAttribute("titleModel");
                     %>
                     <div class="grid img-container justify-content-center no-gutters">
                         <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
                         <%
                             for(int i = 0 ; i < mediumList.size() ; i++) {
                         %>
-                        <div class="grid-item branding  col-sm-12 col-md-6 col-lg-3">
+                        <div class="grid-item <%out.print(titleList.get(i));%> col-sm-12 col-md-6 col-lg-3">
 
                             <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->
                                 <div class="project_box_one">
@@ -350,6 +362,7 @@
                 </div>
             </div>
         </div>
+        <!--=================== masaonry portfolio end====================-->
         <!--=================== content body end ====================-->
     </div>
 </div>
