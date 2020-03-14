@@ -1,6 +1,7 @@
 package kr.co.photograph.jhgallery.config;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -19,7 +20,12 @@ import java.util.Properties;
 @Controller
 @RequestMapping("/")
 
+
+
 public class MailConfig {
+
+    @Autowired
+    GlobalProperties globalProperties;
     Properties pt = new Properties();
 
     @Value("${mail.smtp.port}")
@@ -35,13 +41,14 @@ public class MailConfig {
     @Value("${mail.smtp.socketFactory.fallback}")
     private boolean fallback;
 
+
     @Bean
     public JavaMailSender javaMailService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost("smtp.gmail.com");
         javaMailSender.setPort(port);
-        javaMailSender.setUsername("amapow25");
-        javaMailSender.setPassword("Kk6532pu@@");
+        javaMailSender.setUsername(globalProperties.getMailUsername());
+        javaMailSender.setPassword(globalProperties.getMailPassword());
 
         pt.put("mail.smtp.socketFactory.port", socketPort); pt.put("mail.smtp.auth", auth);
         pt.put("mail.smtp.starttls.enable", starttls); pt.put("mail.smtp.starttls.required", startlls_required);
