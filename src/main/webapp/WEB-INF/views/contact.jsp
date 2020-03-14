@@ -26,6 +26,17 @@
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
+    <script language="JavaScript">
+        function nullCheck() {
+            var mailForm = document.mailSender;
+            if(mailForm.eemail.value=="") {
+                alert("E-Mail is mandotory field")
+                return mailForm.eemail.focus();
+            }
+
+            return mailForm.submit();
+        }
+    </script>
 </head>
 <body>
 <div class="loader">
@@ -158,7 +169,7 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    <form method = "POST" action = sendmail>
+                                    <form name = "mailSender" method = "POST" action = sendmail>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         <div class="mt75 row justify-content-center">
                                             <div class="col-lg-6 col-12">
@@ -174,7 +185,7 @@
                                                 <textarea name="text" placeholder="Massage" class="form-control" cols="4" rows="4"></textarea>
                                             </div>
                                             <div class="col-12">
-                                                <button name="sendmail" value = "sendmail" type="mail" class="btn btn-primary">Send</button>
+                                                <button onClick = nullCheck() type="button" name="sendmail" value = "sendmail" class="btn btn-primary">Send</button>
                                             </div>
                                         </div>
                                     </form>
