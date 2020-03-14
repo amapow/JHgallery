@@ -144,7 +144,7 @@
                             <sec:authorize access ="isAuthenticated()">
                                 <a href = /logout>Janghyeon Jung</a>
                             </sec:authorize>
-                            All rights reserved</br>with Colorlib
+                            All rights reserved</br>with <a href="https://colorlib.com">Colorlib</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>

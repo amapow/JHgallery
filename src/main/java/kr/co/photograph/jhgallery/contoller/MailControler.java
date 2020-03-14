@@ -24,11 +24,10 @@ public class MailControler {
                 final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
                 helper.setFrom(eemail);
                 helper.setTo("amapow25@gmail.com");
-                helper.setSubject(subject + " from" + name);
+                helper.setSubject(subject + " from " + name + "(" + eemail + ")");
                 helper.setText(text);
             }
         };
-        javaMailSender.send(preparator);
         return "/contact";
     }
 }
