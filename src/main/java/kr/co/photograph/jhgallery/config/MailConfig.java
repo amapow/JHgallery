@@ -16,17 +16,10 @@ import java.util.Properties;
 
 @Component
 @PropertySource("classpath:mail.properties")
-
-@Controller
-@RequestMapping("/")
-
-
-
 public class MailConfig {
-
+    Properties pt = new Properties();
     @Autowired
     GlobalProperties globalProperties;
-    Properties pt = new Properties();
 
     @Value("${mail.smtp.port}")
     private int port;
@@ -40,7 +33,6 @@ public class MailConfig {
     private boolean startlls_required;
     @Value("${mail.smtp.socketFactory.fallback}")
     private boolean fallback;
-
 
     @Bean
     public JavaMailSender javaMailService() {
@@ -57,6 +49,10 @@ public class MailConfig {
         javaMailSender.setJavaMailProperties(pt);
         javaMailSender.setDefaultEncoding("UTF-8");
         return javaMailSender;
+    }
+
+    public static void main(String[] args) {
+        System.out.println();
     }
 }
 

@@ -8,9 +8,9 @@ import org.springframework.context.annotation.PropertySources;
 
 @Configuration
 @PropertySources({
-        @PropertySource( value = "file:${user.home}/WebProject/etc/config.properties", ignoreResourceNotFound = true),
-        @PropertySource( value = "file:/var/jenkins_home/workspace/config/config.properties", ignoreResourceNotFound = true)
-
+        @PropertySource( value = "file:${user.home}/WebProject/etc/config.properties", ignoreResourceNotFound = true ),
+        @PropertySource( value = "file:/var/jenkins_home/workspace/config/config.properties", ignoreResourceNotFound = true ),
+        @PropertySource( value = "file:/home/janghyeon/service_jhgallery/config/config.properties", ignoreResourceNotFound = true )
 })
 @Getter
 public class GlobalProperties {
@@ -20,15 +20,17 @@ public class GlobalProperties {
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
 
-    @Value("{spring.datasource.username}")
+    @Value("${spring.datasource.username}")
     private String dataSourceUsername;
 
-    @Value("{spring.datasource.password}")
+    @Value("${spring.datasource.password}")
     private String dataSourcePassword;
 
-    @Value("{javaMailSender.setUsername}")
+    @Value("${javaMailSender.setUsername}")
     private String mailUsername;
 
-    @Value("{javaMailSender.setPassword}")
+    @Value("${javaMailSender.setPassword}")
     private String mailPassword;
+
+
 }
