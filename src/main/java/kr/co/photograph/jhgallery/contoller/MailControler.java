@@ -28,6 +28,7 @@ public class MailControler {
                 helper.setText(text);
             }
         };
+        javaMailSender.send(preparator);
         return "/contact";
     }
 }

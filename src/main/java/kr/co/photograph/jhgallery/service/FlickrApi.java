@@ -5,7 +5,6 @@ import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
-import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,14 +61,4 @@ public class FlickrApi {
         ArrayList<String> returnList = search(photoList, option);
         return returnList;
     }
-
-//    public static void main(String[] args) throws FlickrException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-//        FlickrApi flickApi = new FlickrApi();
-////        ArrayList<String> list = flickApi.getImages("Large");
-////        System.out.println(list);
-////        ArrayList<String> medium = flickApi.getImages("Medium");
-////        System.out.println(medium);
-//        ArrayList<String> title = flickApi.getImages("Title");
-//        System.out.println(title);
-//    }
 }
