@@ -32,17 +32,21 @@ public class AdminController {
         return photoModel;
     }
 
+    @RequestMapping(value = "upload", method = RequestMethod.GET)
+    public String upload(Locale locale, Model model) {
+        model.addAttribute("upload", "upload");
+        return "admin/upload";
+    }
 
+    @RequestMapping(value = "authConfig", method = RequestMethod.GET)
+    public String authConfig(Locale locale, Model model) {
+        model.addAttribute("authConfig", "authConfig");
+        return "admin/authConfig";
+    }
 
-//    @RequestMapping(value = "admin/login.jsp", method = RequestMethod.GET)
-//    public String InsertAdmin(Locale locale, Model model) {
-//        model.addAttribute("admin/login.jsp", "admin/login.jsp");
-//        return "admin/login.jsp";
-//    }
-//
-//    @RequestMapping(value = "admin/admin", method = RequestMethod.GET)
-//    public String Admin(Locale locale, Model model) {
-//        model.addAttribute("admin/admin", "admin/admin");
-//        return "admin/admin";
-//    }
+    @RequestMapping(value = "categoryConfig", method = RequestMethod.GET)
+    public String categoryConfig(Locale locale, Model model) {
+        model.addAttribute("categoryConfig", "categoryConfig");
+        return "admin/categoryConfig";
+    }
 }

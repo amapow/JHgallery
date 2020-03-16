@@ -52,6 +52,7 @@ public class FlickrApi {
         method.setAccessible(true);
         while (photoIterator.hasNext()) {
             photo = (Photo) photoIterator.next();
+
             returnList.add((method.invoke(photo).toString()));
         }
         return returnList;

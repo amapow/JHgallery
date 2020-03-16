@@ -57,7 +57,13 @@ dependencies {
     // flickr4java
     compile 'com.flickr4java:flickr4java:3.0.2'
     compile 'com.github.scribejava:scribejava-apis'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.8'
+    compile 'org.scribe:scribe:1.3.3'
 
+
+    // MyBatis
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile "org.mybatis:mybatis-spring:1.2.3"
 }
 
 test {
