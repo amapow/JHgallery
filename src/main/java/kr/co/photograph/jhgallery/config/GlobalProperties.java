@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySources;
 @PropertySources({
         @PropertySource( value = "file:${user.home}/WebProject/etc/config.properties", ignoreResourceNotFound = true ),
         @PropertySource( value = "file:/var/jenkins_home/workspace/config/config.properties", ignoreResourceNotFound = true ),
+        @PropertySource( value = "file:C:/Users/Administrator/Documents/config.properties", ignoreResourceNotFound = true ),
         @PropertySource( value = "file:/home/janghyeon/service_jhgallery/config/config.properties", ignoreResourceNotFound = true )
 })
 @Getter
