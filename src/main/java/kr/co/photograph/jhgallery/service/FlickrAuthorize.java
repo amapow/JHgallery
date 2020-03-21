@@ -42,7 +42,8 @@ public class FlickrAuthorize {
         Auth auth = this.authInterface.checkToken(accessToken);
         RequestContext.getRequestContext().setAuth(auth);
         File file = new File("/Users/janghyeon/authstore");
-        this.authStore = new FileAuthStore(file);
+        File file2 = new File("/home/janghyeon/service_jhgallery/config");
+        this.authStore = new FileAuthStore(file2);
         this.authStore.store(auth);
         System.out.println("Auth Done!!");
     }
