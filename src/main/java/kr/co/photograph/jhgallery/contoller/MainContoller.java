@@ -1,5 +1,6 @@
 package kr.co.photograph.jhgallery.contoller;
 
+import kr.co.photograph.jhgallery.model.Photo;
 import kr.co.photograph.jhgallery.service.FlickrApi;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,29 +15,13 @@ import java.util.Locale;
 
 @RequestMapping("/")
 public class MainContoller {
-    FlickrApi flick = new FlickrApi();
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView home_1() throws Exception {
-        ArrayList<String> mediumPhotoList = flick.getImages("Medium");
-        ArrayList<String> largePhotoList = flick.getImages("Large");
-        ArrayList<String> titlePhotoList = flick.getImages("Title");
+        Photo photo = new Photo();
         ModelAndView photoModel = new ModelAndView("home");
-        photoModel.addObject("mediumModel", mediumPhotoList);
-        photoModel.addObject("largeModel", largePhotoList);
-        photoModel.addObject("titleModel", titlePhotoList);
-
-        return photoModel;
-    }
-
-    @RequestMapping(value = "home", method = RequestMethod.GET)
-    public ModelAndView home_2() throws Exception {
-        ArrayList<String> mediumPhotoList = flick.getImages("Medium");
-        ArrayList<String> largePhotoList = flick.getImages("Large");
-        ArrayList<String> titlePhotoList = flick.getImages("Title");
-        ModelAndView photoModel = new ModelAndView("home");
-        photoModel.addObject("mediumModel", mediumPhotoList);
-        photoModel.addObject("largeModel", largePhotoList);
-        photoModel.addObject("titleModel", titlePhotoList);
+        photoModel.addObject("mediumModel", photo.getMediumUrl());
+        photoModel.addObject("largeModel", photo.getLargeUrl());
+        photoModel.addObject("titleModel", photo.getTitle());
 
         return photoModel;
     }

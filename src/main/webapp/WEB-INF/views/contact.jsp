@@ -66,8 +66,8 @@
             <div class="side_menu_section">
                 <ul class="menu_nav">
                     <li>
-                        <a href="home">
-                            Home
+                        <a href="">
+                            Archive
                         </a>
                     </li>
 <%--                    <li>--%>

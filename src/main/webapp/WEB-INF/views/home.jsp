@@ -58,7 +58,7 @@
             <div class="side_menu_section">
                 <ul class="menu_nav">
                     <li>
-                        <a href="home">
+                        <a href="">
                             Archive
                         </a>
                     </li>
@@ -117,6 +117,7 @@
                 </div>
             </div>
             <!--social and copyright end -->
+
         </div>
         <!--=================== side menu end====================-->
         <!--=================== content body====================-->

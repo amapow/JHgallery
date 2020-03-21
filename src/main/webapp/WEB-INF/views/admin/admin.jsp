@@ -60,7 +60,7 @@
                 <div class="side_menu_section">
                     <ul class="menu_nav">
                         <li>
-                            <a href="../home">
+                            <a href="..">
                                 Return Home
                             </a>
                         </li>
