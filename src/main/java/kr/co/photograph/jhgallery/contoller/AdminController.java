@@ -1,8 +1,18 @@
 package kr.co.photograph.jhgallery.contoller;
 
 
+import com.flickr4java.flickr.Flickr;
+import com.flickr4java.flickr.FlickrException;
+import com.flickr4java.flickr.REST;
+import com.flickr4java.flickr.RequestContext;
+import com.flickr4java.flickr.auth.Auth;
 import com.flickr4java.flickr.photos.Photo;
+import com.flickr4java.flickr.uploader.UploadMetaData;
+import com.flickr4java.flickr.uploader.Uploader;
+import com.flickr4java.flickr.util.AuthStore;
 import kr.co.photograph.jhgallery.service.FlickrApi;
+import kr.co.photograph.jhgallery.service.FlickrAuthorize;
+import lombok.var;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,31 +20,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.xml.ws.spi.http.HttpContext;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Scanner;
 
 @Controller
 
 @RequestMapping("/")
 public class AdminController {
+    FlickrAuthorize auth = new FlickrAuthorize();
+    String url;
+    @RequestMapping(value = "auth", method = RequestMethod.GET)
+    public ModelAndView setUrl() throws Exception {
+        this.url = auth.getUrl();
+        ModelAndView urlModel = new ModelAndView("admin/auth");
+        urlModel.addObject("url", url);
 
-    @RequestMapping(value = "admin/imageSelector", method = RequestMethod.GET)
-    public ModelAndView ImageSelector() throws Exception {
-        FlickrApi flick = new FlickrApi();
-        ArrayList<String> mediumPhotoList = flick.getImages("Medium");
-        ArrayList<String> largePhotoList = flick.getImages("Large");
-        ArrayList<String> titlePhotoList = flick.getImages("Title");
-        ModelAndView photoModel = new ModelAndView("admin/imageSelector");
-        photoModel.addObject("mediumModel", mediumPhotoList);
-        photoModel.addObject("largeModel", largePhotoList);
-        photoModel.addObject("titleModel", titlePhotoList);
+        return urlModel;
+    }
 
-        return photoModel;
+    @RequestMapping(value = "getAuth", method = RequestMethod.POST)
+    public String getAuth(String token) throws FlickrException, IOException {
+        auth.authorize(token);
+
+        return "admin/admin";
     }
 
     @RequestMapping(value = "upload", method = RequestMethod.GET)
-    public String upload(Locale locale, Model model) {
-        model.addAttribute("upload", "upload");
+    public String upload(Locale locale, Model model) throws IOException, FlickrException {
+//        RequestContext.getRequestContext().setAuth(auth.getAuthStore().retrieve(auth.getUserId()));
+//        model.addAttribute("upload", "upload");
+//        File file = new File("/Users/janghyeon/Pictures/4e5d667d2f4d0c.jpg");
+//        FileInputStream fileInputStream = new FileInputStream(file);
+//
+//        Uploader uploader = auth.getFlickr().getUploader();
+//        UploadMetaData uploadMetaData = new UploadMetaData();
+//        uploadMetaData.setPublicFlag(true);
+//        uploadMetaData.setTitle("Photo upload Test");
+//        String id = uploader.upload(fileInputStream, uploadMetaData);
+//
+//        Photo p = auth.getFlickr().getPhotosInterface().getPhoto(id, auth.getSecret());
+//        String uploadedUrl = p.getLargeUrl();
+//        System.out.println(uploadedUrl);
         return "admin/upload";
     }
 

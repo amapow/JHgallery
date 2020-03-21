@@ -32,45 +32,10 @@ public class MainContoller {
         return "about";
     }
 
-    @RequestMapping(value = "blog", method = RequestMethod.GET)
-    public String blog(Locale locale, Model model) {
-        model.addAttribute("blog", "blog");
-        return "blog";
-    }
 
     @RequestMapping(value = "contact", method = RequestMethod.GET)
     public String contact(Locale locale, Model model) {
         model.addAttribute("contact", "contact");
         return "contact";
     }
-
-    @RequestMapping(value = "elements", method = RequestMethod.GET)
-    public String elements(Locale locale, Model model) {
-        model.addAttribute("elements", "elements");
-        return "elements";
-    }
-
-    @RequestMapping(value = "portfolio", method = RequestMethod.GET)
-    public String portfolio(Locale locale, Model model) {
-        model.addAttribute("portfolio", "portfolio");
-        return "portfolio";
-    }
 }
-
-//    @Autowired
-//    JavaMailSender javaMailSender;
-
-//    @RequestMapping(value = "sendmail", method = RequestMethod.POST)
-//    public String sendMail(String name, String eemail, String subject, String text) {
-//        final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-//            @Override
-//            public void prepare(MimeMessage mimeMessage) throws Exception {
-//                final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-//                helper.setFrom(eemail);
-//                helper.setTo("amapow25@gmail.com");
-//                helper.setSubject(subject + " from" + name);
-//                helper.setText(text);
-//            }
-//        };
-//        javaMailSender.send(preparator);
-//        return "contact";

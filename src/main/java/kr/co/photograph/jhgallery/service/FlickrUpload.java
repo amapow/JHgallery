@@ -21,30 +21,25 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FlickrUpload {
-    private String apikey = "97edf61c3435783d407d85e214e0f2b7";
-    private String secret = "cae4d7d188e32e86";
-    private AuthStore authStore;
+    FlickrAuthorize auth;
 
-//    public static void main(String[] args) throws FileNotFoundException, FlickrException, IOException {
-//        FlickrUpload authr = new FlickrUpload();
-//        String apikey = "97edf61c3435783d407d85e214e0f2b7";
-//        String secret = "cae4d7d188e32e86";
-//        Photo photo;
-//
-//        Flickr flickr = new Flickr(apikey, secret, new REST());
-//        File file = new File("/Users/janghyeon/Pictures/4e5d667d2f4d0c.jpg");
-//        FileInputStream fileInputStream = new FileInputStream(file);
-//
-//        Uploader uploader = flickr.getUploader();
-//        UploadMetaData uploadMetaData = new UploadMetaData();
-//        uploadMetaData.setPublicFlag(true);
-//        uploadMetaData.setTitle("Photo upload Test");
-//        String id = uploader.upload(fileInputStream, uploadMetaData);
-//
-//
-//
-//        Photo p = flickr.getPhotosInterface().getPhoto(id, secret);
-//        String uploadedUrl = p.getLargeUrl();
-//        System.out.println(uploadedUrl);
-//    }
+    public void upload() throws FileNotFoundException, FlickrException {
+        Flickr flickr = new Flickr(auth.getApikey(), auth.getSecret(), new REST());
+        Auth uploadAuth = auth.getAuthStore().retrieve(auth.getUserId());
+        RequestContext.getRequestContext().setAuth(uploadAuth);
+        System.out.println(uploadAuth.getUser() + uploadAuth.getToken() + uploadAuth.getPermission());
+        File file = new File("/Users/janghyeon/Pictures/4e5d667d2f4d0c.jpg");
+        FileInputStream fileInputStream = new FileInputStream(file);
+
+        Uploader uploader = flickr.getUploader();
+        UploadMetaData uploadMetaData = new UploadMetaData();
+        uploadMetaData.setPublicFlag(true);
+        uploadMetaData.setTitle("Photo upload Test");
+        String id = uploader.upload(fileInputStream, uploadMetaData);
+
+        Photo p = flickr.getPhotosInterface().getPhoto(id, uploadAuth.getTokenSecret());
+        String uploadedUrl = p.getLargeUrl();
+        System.out.println(uploadedUrl);
+    }
+
 }

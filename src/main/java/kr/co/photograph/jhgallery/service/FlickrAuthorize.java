@@ -7,36 +7,43 @@ import com.flickr4java.flickr.RequestContext;
 import com.flickr4java.flickr.auth.Auth;
 import com.flickr4java.flickr.auth.AuthInterface;
 import com.flickr4java.flickr.auth.Permission;
-import com.flickr4java.flickr.photos.Photo;
-import com.flickr4java.flickr.photos.PhotoList;
-import com.flickr4java.flickr.photos.SearchParameters;
 import com.flickr4java.flickr.util.AuthStore;
+import com.flickr4java.flickr.util.FileAuthStore;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuth1Token;
 import lombok.Getter;
+import lombok.Setter;
 import org.scribe.model.Verifier;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+@Setter
 @Getter
 public class FlickrAuthorize {
     private String apikey = "97edf61c3435783d407d85e214e0f2b7";
     private String secret = "cae4d7d188e32e86";
     private String userId = "146330423@N07";
     private Flickr flickr = new Flickr(apikey, secret, new REST());
+    private String url;
+    private AuthInterface authInterface;
+    private OAuth1RequestToken requestToken;
     private AuthStore authStore;
 
-    public void authorize() throws FlickrException, IOException {
+    public FlickrAuthorize() {
+        this.authInterface = flickr.getAuthInterface();
+        this.requestToken = authInterface.getRequestToken();
+        this.url = authInterface.getAuthorizationUrl(this.requestToken, Permission.DELETE);
+    }
 
-        AuthInterface authInterface = flickr.getAuthInterface();
-        OAuth1RequestToken RequestToken  = authInterface.getRequestToken();
-        String url = authInterface.getAuthorizationUrl(RequestToken, Permission.DELETE);
-        System.out.println(url);
-        String tokenKey=new Scanner(System.in).nextLine();
-
-        OAuth1Token accessToken = authInterface.getAccessToken(RequestToken, new Verifier(tokenKey).getValue());
-        Auth auth = authInterface.checkToken((accessToken));
+    public void authorize(String tokenKey) throws FlickrException, IOException {
+        OAuth1Token accessToken = authInterface.getAccessToken(this.requestToken, new Verifier(tokenKey).getValue());
+        Auth auth = this.authInterface.checkToken(accessToken);
         RequestContext.getRequestContext().setAuth(auth);
+        File file = new File("/Users/janghyeon/authstore");
+        this.authStore = new FileAuthStore(file);
+        this.authStore.store(auth);
+        System.out.println("Auth Done!!");
     }
 }

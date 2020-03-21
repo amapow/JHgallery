@@ -60,7 +60,7 @@
             <div class="side_menu_section">
                 <ul class="menu_nav">
                     <li>
-                        <a href="../home">
+                        <a href="..">
                             Return Home
                         </a>
                     </li>
@@ -83,20 +83,7 @@
             </div>
         </div>
         <div class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
-            <div class="portfolio">
-                <div class="container-fluid">
-                    <div class="grid img-container justify-content-center no-gutters">
-                        <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
-                        <div class="grid-item col-sm-12 col-md-6 col-lg-3">
-                            <div class="project_box_one">
-                                <div class="product_info">
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

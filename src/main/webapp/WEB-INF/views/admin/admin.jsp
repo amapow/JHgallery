@@ -79,6 +79,11 @@
                                 Auth Config
                             </a>
                         </li>
+                        <li>
+                            <a href="auth">
+                                Get Auth
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
