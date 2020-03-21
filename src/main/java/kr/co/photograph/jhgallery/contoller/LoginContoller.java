@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginContoller {
     private MemberService memberService;
 
-//    @GetMapping("/user/login")
-//    public String dispLogin() {
-//        return "/user/login";
-//    }
-
     @GetMapping("/user/signup")
     public String dispSignup() {
         return "/user/signup";
