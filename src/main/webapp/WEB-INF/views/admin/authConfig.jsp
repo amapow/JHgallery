@@ -5,6 +5,7 @@
   Time: 7:28 오후
   admin page
 --%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="kr">
@@ -85,16 +86,35 @@
         <div class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
             <div class="portfolio">
                 <div class="container-fluid">
+                    <form action = '/admin/setAuthConfig' style = 'text-align: center'>
+                    <%
+                        {
+                            ArrayList<String> mediumList = (ArrayList<String>)request.getAttribute("mediumModel");
+                            ArrayList<String> titleList = (ArrayList<String>)request.getAttribute("titleModel");
+                            ArrayList<String> permissionsList = (ArrayList<String>)request.getAttribute("permissionsModel");
+                    %>
                     <div class="grid img-container justify-content-center no-gutters">
                         <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
-                        <div class="grid-item col-sm-12 col-md-6 col-lg-3">
-                            <div class="project_box_one">
-                                <div class="product_info">
+                        <%
+                            for(int i = 0 ; i < mediumList.size() ; i++) {
+                        %>
+                        <div class="grid-item <%out.print(titleList.get(i));%> col-sm-12 col-md-6 col-lg-3">
+                                <div class="project_box_one">
+                                    <img src="<%out.print(mediumList.get(i));%>"/><!-- alt="pro1" />-->
+                                    <p><%out.print(permissionsList.get(i));%></p>
+                                    <div class="product_info">
+                                    </div>
                                 </div>
-                            </div>
-                            </a>
+                                <input type = 'radio' name = perms
+                                       value = 'Public'
+                                />Public
+                                <input type = 'radio' name = perms
+                                       value = 'Private' />Private
                         </div>
+                        <%}}%>
                     </div>
+                        <input type = 'submit'/>
+                    </form>
                 </div>
             </div>
         </div>

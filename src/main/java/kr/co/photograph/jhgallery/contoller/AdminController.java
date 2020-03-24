@@ -1,15 +1,17 @@
 package kr.co.photograph.jhgallery.contoller;
 
 
-import com.flickr4java.flickr.Flickr;
-import com.flickr4java.flickr.FlickrException;
-import com.flickr4java.flickr.REST;
-import com.flickr4java.flickr.RequestContext;
+import com.flickr4java.flickr.*;
 import com.flickr4java.flickr.auth.Auth;
-import com.flickr4java.flickr.photos.Photo;
+import com.flickr4java.flickr.auth.Permission;
+import com.flickr4java.flickr.photos.Permissions;
+import com.flickr4java.flickr.photos.PhotosInterface;
+import com.flickr4java.flickr.photos.SearchParameters;
+import com.flickr4java.flickr.photos.upload.UploadInterface;
 import com.flickr4java.flickr.uploader.UploadMetaData;
 import com.flickr4java.flickr.uploader.Uploader;
 import com.flickr4java.flickr.util.AuthStore;
+import kr.co.photograph.jhgallery.model.Photo;
 import kr.co.photograph.jhgallery.service.FlickrApi;
 import kr.co.photograph.jhgallery.service.FlickrAuthorize;
 import lombok.var;
@@ -54,7 +56,13 @@ public class AdminController {
 
     @RequestMapping(value = "upload", method = RequestMethod.GET)
     public String upload(Locale locale, Model model) throws IOException, FlickrException {
-//        RequestContext.getRequestContext().setAuth(auth.getAuthStore().retrieve(auth.getUserId()));
+        RequestContext.getRequestContext().setAuth(auth.getAuthStore().retrieve(auth.getUserId()));
+        PhotosInterface pi = new PhotosInterface(auth.getApikey(), auth.getSecret(), new REST());
+        Permissions perm = new Permissions();
+        perm.setPublicFlag(true);
+        pi.setPerms("48277974466", perm);
+        System.out.println(pi.getPerms("48277974466").isFamilyFlag());
+
 //        model.addAttribute("upload", "upload");
 //        File file = new File("/Users/janghyeon/Pictures/4e5d667d2f4d0c.jpg");
 //        FileInputStream fileInputStream = new FileInputStream(file);
@@ -70,11 +78,22 @@ public class AdminController {
 //        System.out.println(uploadedUrl);
         return "admin/upload";
     }
+//
+//    @RequestMapping(value = "authConfig", method = RequestMethod.GET)
+//    public String authConfig(Locale locale, Model model) {
+//        model.addAttribute("authConfig", "authConfig");
+//        return "admin/authConfig";
+//    }
 
     @RequestMapping(value = "authConfig", method = RequestMethod.GET)
-    public String authConfig(Locale locale, Model model) {
-        model.addAttribute("authConfig", "authConfig");
-        return "admin/authConfig";
+    public ModelAndView authConfig() throws Exception {
+        RequestContext.getRequestContext().setAuth(auth.getAuthStore().retrieve(auth.getUserId()));
+        kr.co.photograph.jhgallery.model.Photo photo = new Photo();
+        ModelAndView photoModel = new ModelAndView("admin/authConfig");
+        photoModel.addObject("mediumModel", photo.getMediumUrl());
+        photoModel.addObject("titleModel", photo.getTitle());
+
+        return photoModel;
     }
 
     @RequestMapping(value = "categoryConfig", method = RequestMethod.GET)
