@@ -3,6 +3,7 @@ package kr.co.photograph.jhgallery.service;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
+import com.flickr4java.flickr.RequestContext;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
@@ -15,23 +16,18 @@ import java.util.Iterator;
 import java.lang.reflect.Method;
 
 @Getter
-@Setter
-public class FlickrApi {
-    private String apikey = "055c7b929054f3e2a33e16344c946f54";
-    private String secret = "348f89836dcc91a7";
-    private String userId = "146330423@N07";
+public class FlickrApi extends FlickrAuthorize{
+    FlickrAuthorize auth = new FlickrAuthorize();
 
-
-    private PhotoList<Photo> searchByUserId() throws FlickrException {
-        Flickr flickr = new Flickr(apikey, secret, new REST());
+    public PhotoList<Photo> searchByUserId() throws FlickrException {
         SearchParameters searchParameters = new SearchParameters();
-        searchParameters.setUserId(userId);
+        searchParameters.setUserId(auth.getUserId());
 
-        PhotoList<Photo> photoList = flickr.getPhotosInterface().search(searchParameters, 500, 0);
+        PhotoList<Photo> photoList = auth.getFlickr().getPhotosInterface().search(searchParameters, 500, 0);
         return photoList;
     }
 
-    private ArrayList<String> search(PhotoList<Photo> photoList, String option) throws FlickrException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public ArrayList<String> search(PhotoList<Photo> photoList, String option) throws FlickrException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Iterator photoIterator = photoList.iterator();
         ArrayList<String> returnList = new ArrayList<>();
         Photo photo;
@@ -43,6 +39,9 @@ public class FlickrApi {
         }
         else if(option.equals("Title")) {
             option = "getTitle";
+        }
+        else if(option.equals("Id")) {
+            option = "getId";
         }
         else {
             System.out.println("Check your option");
