@@ -1,17 +1,19 @@
 # JHgallery
 
 www.janghyeonjung.me
+\n
+\n
 
-Server:
-JAVA
-Spring Boot Framework
-FlickrAPI
-Google Mail Service
-NCP (Ubuntu Linux 16.04)
+Server:\n
+JAVA\n
+Spring Boot Framework\n
+FlickrAPI\n
+Google Mail Service\n
+NCP (Ubuntu Linux 16.04)\n
 
-Views:
-Boot Strap
-JSP
+Views:\n
+Boot Strap\n
+JSP\n
 
-CI:
-Jenkins with Docker
+CI:\n
+Jenkins with Docker\n
