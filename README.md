@@ -1,6 +1,6 @@
 # JHgallery
 
-pic.janghyeonjung.me
+http://pic.janghyeonjung.me
 </b>
 </b>
 
