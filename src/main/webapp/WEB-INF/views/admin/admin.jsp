@@ -65,22 +65,22 @@
                             </a>
                         </li>
                         <li>
-                            <a href="upload">
+                            <a href="admin/upload">
                                 Upload
                             </a>
                         </li>
                         <li>
-                            <a href="categoryConfig">
+                            <a href="admin/categoryConfig">
                                 Project Config
                             </a>
                         </li>
                         <li>
-                            <a href="authConfig">
+                            <a href="admin/authConfig">
                                 Auth Config
                             </a>
                         </li>
                         <li>
-                            <a href="auth">
+                            <a href="admin/auth">
                                 Get Auth
                             </a>
                         </li>

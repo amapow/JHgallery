@@ -1,7 +1,9 @@
 package kr.co.photograph.jhgallery.contoller;
 
-import kr.co.photograph.jhgallery.model.Photo;
-import kr.co.photograph.jhgallery.service.FlickrApi;
+import kr.co.photograph.jhgallery.service.FlickerServiceAdmin;
+import kr.co.photograph.jhgallery.service.FlickrService;
+import kr.co.photograph.jhgallery.service.PhotoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +17,20 @@ import java.util.Locale;
 
 @RequestMapping("/")
 public class MainContoller {
+
+    @Autowired
+    private PhotoService photoService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView home_1() throws Exception {
-        Photo photo = new Photo();
+        ArrayList<String> mediumUrl = photoService.getImages("Medium");
+        ArrayList<String> largeUrl = photoService.getImages("Large");
+        ArrayList<String> titleUrl = photoService.getImages("Title");
+
         ModelAndView photoModel = new ModelAndView("home");
-        photoModel.addObject("mediumModel", photo.getMediumUrl());
-        photoModel.addObject("largeModel", photo.getLargeUrl());
-        photoModel.addObject("titleModel", photo.getTitle());
+        photoModel.addObject("mediumModel", mediumUrl);
+        photoModel.addObject("largeModel", largeUrl);
+        photoModel.addObject("titleModel", titleUrl);
 
         return photoModel;
     }

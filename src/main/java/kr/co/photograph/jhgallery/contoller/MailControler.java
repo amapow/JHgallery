@@ -18,15 +18,12 @@ public class MailControler {
 
     @RequestMapping(value = "/sendmail", method = RequestMethod.POST)
     public String sendMail(String name, String eemail, String subject, String text) {
-        final MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            @Override
-            public void prepare(MimeMessage mimeMessage) throws Exception {
-                final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-                helper.setFrom(eemail);
-                helper.setTo("amapow25@gmail.com");
-                helper.setSubject(subject + " from " + name + "(" + eemail + ")");
-                helper.setText(text);
-            }
+        final MimeMessagePreparator preparator = mimeMessage -> {
+            final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            helper.setFrom(eemail);
+            helper.setTo("amapow25@gmail.com");
+            helper.setSubject(subject + " from " + name + "(" + eemail + ")");
+            helper.setText(text);
         };
         javaMailSender.send(preparator);
         return "/contact";
