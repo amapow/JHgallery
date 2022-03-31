@@ -7,12 +7,16 @@ import kr.co.photograph.jhgallery.service.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 @RequiredArgsConstructor
@@ -60,13 +64,32 @@ public class AdminController {
         return photoModel;
     }
 
-    @RequestMapping(value = "urlSend", method = {RequestMethod.GET, RequestMethod.POST})
-    public String deleteItem() {
-        System.out.println("result");
-
-        return "result";
+    @RequestMapping(value = "delete/result", method = {RequestMethod.GET})
+    public String deleteItem(@RequestParam String id) {
+        String[] deleteStringId = id.split(",");
+        ArrayList<String> deleteIdArray = new ArrayList<>();
+        try {
+            for (String item : deleteStringId) {
+                deleteIdArray.add(item);
+            }
+            flickrService.delete(deleteIdArray);
+            photoService.refreshPhotoList();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("삭제 항목을 재선택 하세용");
+        } catch (FlickrException e) {
+            e.getErrorCode();
+            System.out.println("Authorize를 수행하세영");
+        }
+        return "redirect:/admin/delete";
     }
 
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public String missingDeleteItemParams(MissingServletRequestParameterException e) {
+        String id = e.getParameterName();
+        System.out.println(id + " parameter is missing");
+        return "redirect:";
+    }
 
 
 //    @RequestMapping(value = "authConfig", method = RequestMethod.GET)

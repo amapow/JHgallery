@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Getter
 @Service
@@ -62,8 +63,10 @@ public class FlickerServiceAdmin implements FlickrService {
     }
 
     @Override
-    public void delete() throws FlickrException {
+    public void delete(ArrayList<String> deleteItem) throws FlickrException {
         RequestContext.getRequestContext().setAuth(auth);
-        flickr.getFlickr().getPhotosInterface().delete("51971212675");
+        for (String item : deleteItem) {
+            flickr.getFlickr().getPhotosInterface().delete(item);
+        }
     }
 }

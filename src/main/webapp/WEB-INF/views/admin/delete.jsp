@@ -138,12 +138,11 @@
                         <div class="grid-item <%out.print(myPhotoArrayList.get(i).getTitle());%> col-sm-12 col-md-6 col-lg-3">
 
                             <%--                            <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->--%>
-                            <a href="<%out.print(myPhotoArrayList.get(i).getLargeUrl());%>"> <!--title="project name 1">-->
                                 <div class="project_box_one">
                                     <img src="<%out.print(myPhotoArrayList.get(i).getMediumUrl());%>"/><!-- alt="pro1" />-->
                                     <div class="product_info">
-                                    <form id="urlSend" action="result" method="get">
-                                        <input type="checkbox" name="ID" value="<%out.print(myPhotoArrayList.get(i).getId());%>"/>
+                                    <form id="urlSend" action="delete/result" method="get">
+                                        <input type="checkbox" name="id" value="<%out.print(myPhotoArrayList.get(i).getId());%>"/>
 
                                     </div>
                                 </div>

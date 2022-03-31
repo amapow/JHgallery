@@ -49,6 +49,7 @@ public class PhotoServiceImpl implements PhotoService {
     public PhotoList<Photo> searchByUserId() throws FlickrException {
         SearchParameters searchParameters = new SearchParameters();
         searchParameters.setUserId(flickr.getUserId());
+        searchParameters.setPrivacyFilter(1);
 
         PhotoList<Photo> photoList = flickr.getFlickr().getPhotosInterface().search(searchParameters, 500, 0);
         return photoList;
@@ -56,6 +57,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public void refreshPhotoList() throws FlickrException {
+        myPhotoList.clear();
         this.myPhotoList = searchToMyPhoto();
     }
 }
