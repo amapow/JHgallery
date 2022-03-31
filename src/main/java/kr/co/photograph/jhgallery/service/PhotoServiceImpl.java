@@ -7,9 +7,7 @@ import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,45 +20,43 @@ import java.util.Iterator;
 @Service
 public class PhotoServiceImpl implements PhotoService {
 
-    private String apikey;
-    private String secret;
-    private String userId;
-    private Flickr flickr;
+    private final String apikey;
+    private final String secret;
+    private final String userId;
+    private final Flickr flickr;
 
-    @Autowired
     public PhotoServiceImpl(@Value("${flickr.apikey}") String apikey,
                             @Value("${flickr.secret}") String secret,
                             @Value("${flickr.userId}") String userId) {
         this.apikey = apikey;
         this.secret = secret;
         this.userId = userId;
-        this.flickr = new Flickr(apikey, secret, new REST());
+        flickr = new Flickr(apikey, secret, new REST());
     }
-
-    public PhotoServiceImpl() {}
 
     @Override
     public ArrayList<String> search(PhotoList<Photo> photoList, String option) throws FlickrException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Iterator photoIterator = photoList.iterator();
         ArrayList<String> returnList = new ArrayList<>();
         Photo photo;
+        String selectedOption;
         if(option.equals("Large")) {
-            option = "getLargeUrl";
+            selectedOption = "getLargeUrl";
         }
         else if(option.equals("Medium")) {
-            option = "getMediumUrl";
+            selectedOption = "getMediumUrl";
         }
         else if(option.equals("Title")) {
-            option = "getTitle";
+            selectedOption = "getTitle";
         }
         else if(option.equals("Id")) {
-            option = "getId";
+            selectedOption = "getId";
         }
         else {
             System.out.println("Check your option");
             return null;
         }
-        Method method = Photo.class.getDeclaredMethod(option);
+        Method method = Photo.class.getDeclaredMethod(selectedOption);
         method.setAccessible(true);
         while (photoIterator.hasNext()) {
             photo = (Photo) photoIterator.next();

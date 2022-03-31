@@ -84,6 +84,11 @@
                                 Get Auth
                             </a>
                         </li>
+                        <li>
+                            <a href="admin/delete">
+                                Delete
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

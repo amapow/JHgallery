@@ -1,5 +1,6 @@
 package kr.co.photograph.jhgallery.service;
 
+import kr.co.photograph.jhgallery.domain.Role;
 import kr.co.photograph.jhgallery.domain.dto.MemberDto;
 import kr.co.photograph.jhgallery.domain.entity.MemberEntity;
 import kr.co.photograph.jhgallery.repository.MemberRepository;
@@ -12,9 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import kr.co.photograph.jhgallery.domain.Role;
-import javax.transaction.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -1,10 +1,10 @@
 package kr.co.photograph.jhgallery.contoller;
 
 
-import com.flickr4java.flickr.*;
-import kr.co.photograph.jhgallery.service.FlickerServiceAdmin;
+import com.flickr4java.flickr.FlickrException;
+import kr.co.photograph.jhgallery.model.PhotoSet;
 import kr.co.photograph.jhgallery.service.FlickrService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    @Autowired
-    private FlickrService flickrService;
+    private final FlickrService flickrService;
+    private final PhotoSet photoset;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String admin() {
@@ -42,12 +44,34 @@ public class AdminController {
     }
 
     @RequestMapping(value = "upload", method = RequestMethod.GET)
-    public String upload(Locale locale, Model model) throws IOException, FlickrException {
+    public String upload(Locale locale, Model model) throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         model.addAttribute("upload", "admin/upload");
         flickrService.upload();
+        photoset.refreshPhotoSet();
 
         return "redirect:/admin";
     }
+
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public ModelAndView delete() throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        ModelAndView photoModel = new ModelAndView("admin/delete");
+        photoModel.addObject("mediumModel", photoset.getMediumUrl());
+        photoModel.addObject("largeModel", photoset.getLargeUrl());
+        photoModel.addObject("titleModel", photoset.getTitle());
+//        flickrService.delete();
+//        photoset.refreshPhotoSet();
+
+        return photoModel;
+    }
+
+    @RequestMapping(value = "urlSend", method = {RequestMethod.GET, RequestMethod.POST})
+    public String deleteItem() {
+        System.out.println("result");
+
+        return "result";
+    }
+
+
 
 //    @RequestMapping(value = "authConfig", method = RequestMethod.GET)
 //    public ModelAndView authConfig() throws Exception {

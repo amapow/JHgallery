@@ -1,6 +1,6 @@
 package kr.co.photograph.jhgallery.contoller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -8,13 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.mail.internet.MimeMessage;
-
 @Controller
-
-public class MailControler {
-    @Autowired
-    JavaMailSender javaMailSender;
+@AllArgsConstructor
+public class MailController {
+    private JavaMailSender javaMailSender;
 
     @RequestMapping(value = "/sendmail", method = RequestMethod.POST)
     public String sendMail(String name, String eemail, String subject, String text) {
