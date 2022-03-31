@@ -1,4 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="kr.co.photograph.jhgallery.model.MyPhoto" %>
 <!DOCTYPE html>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%--<%@ taglib prefix="sec" uri="http://java.sun.com/jsp/jstl/core"%>--%>
@@ -127,20 +128,19 @@
                 <div class="container-fluid">
                     <%
                         {
-                            ArrayList<String> mediumList = (ArrayList<String>)request.getAttribute("mediumModel");
-                            ArrayList<String> largeList = (ArrayList<String>)request.getAttribute("largeModel");
-                            ArrayList<String> titleList = (ArrayList<String>)request.getAttribute("titleModel");
+                            ArrayList<MyPhoto> myPhotoArrayList = (ArrayList<MyPhoto>)request.getAttribute("myPhotoList");
                     %>
                     <div class="grid img-container justify-content-center no-gutters">
                         <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
                         <%
-                            for(int i = 0 ; i < mediumList.size() ; i++) {
+                            for(int i = 0 ; i < myPhotoArrayList.size() ; i++) {
                         %>
-                        <div class="grid-item <%out.print(titleList.get(i));%> col-sm-12 col-md-6 col-lg-3">
+                        <div class="grid-item <%out.print(myPhotoArrayList.get(i).getTitle());%> col-sm-12 col-md-6 col-lg-3">
 
-                            <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->
+<%--                            <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->--%>
+                            <a href="<%out.print(myPhotoArrayList.get(i).getLargeUrl());%>"> <!--title="project name 1">-->
                                 <div class="project_box_one">
-                                    <img src="<%out.print(mediumList.get(i));%>"/><!-- alt="pro1" />-->
+                                    <img src="<%out.print(myPhotoArrayList.get(i).getMediumUrl());%>"/><!-- alt="pro1" />-->
                                     <div class="product_info">
                                     </div>
                                 </div>

@@ -1,7 +1,6 @@
 package kr.co.photograph.jhgallery.contoller;
 
-import kr.co.photograph.jhgallery.model.PhotoSet;
-import lombok.AllArgsConstructor;
+import kr.co.photograph.jhgallery.service.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,21 +11,17 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Locale;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class MainController {
 
-    private final PhotoSet photoSet;
+    private final PhotoService photoService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView home_1() throws Exception {
-
-        photoSet.refreshPhotoSet(); // delete 구현 전 임시 로직
+        photoService.refreshPhotoList();
         ModelAndView photoModel = new ModelAndView("home");
-        photoModel.addObject("mediumModel", photoSet.getMediumUrl());
-        photoModel.addObject("largeModel", photoSet.getLargeUrl());
-        photoModel.addObject("titleModel", photoSet.getTitle());
-
+        photoModel.addObject("myPhotoList", photoService.getMyPhotoList());
         return photoModel;
     }
 

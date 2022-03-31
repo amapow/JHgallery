@@ -9,6 +9,6 @@ public interface FlickrService {
 
     void authorize(String tokenKey) throws FlickrException, IOException;
     void upload() throws FlickrException;
-    String getUrl();
+    String getAuthUrl();
     void delete() throws FlickrException;
 }

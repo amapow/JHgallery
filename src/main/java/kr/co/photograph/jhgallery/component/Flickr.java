@@ -13,15 +13,15 @@ public class Flickr {
 
     private final String apikey;
     private final String secret;
-    private final com.flickr4java.flickr.Flickr flickr;
+    private final String userId;
+    private com.flickr4java.flickr.Flickr flickr;
 
-    public Flickr(@Value("${flickr.apikey}") String apikey,
-                  @Value("${flickr.secret}") String secret) {
+    private Flickr(@Value("${flickr.apikey}") String apikey,
+                  @Value("${flickr.secret}") String secret,
+                  @Value("${flickr.userId}") String userId) {
         this.apikey = apikey;
         this.secret = secret;
+        this.userId = userId;
         flickr = new com.flickr4java.flickr.Flickr(apikey, secret, new REST());
     }
-
-
-
 }

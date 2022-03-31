@@ -2,8 +2,8 @@ package kr.co.photograph.jhgallery.contoller;
 
 
 import com.flickr4java.flickr.FlickrException;
-import kr.co.photograph.jhgallery.model.PhotoSet;
 import kr.co.photograph.jhgallery.service.FlickrService;
+import kr.co.photograph.jhgallery.service.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import java.util.Locale;
 @RequestMapping("/admin")
 public class AdminController {
     private final FlickrService flickrService;
-    private final PhotoSet photoset;
+    private final PhotoService photoService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String admin() {
@@ -29,7 +29,7 @@ public class AdminController {
 
     @RequestMapping(value = "auth", method = RequestMethod.GET)
     public ModelAndView setUrl() throws Exception {
-        final String url = flickrService.getUrl();
+        final String url = flickrService.getAuthUrl();
         ModelAndView urlModel = new ModelAndView("admin/auth");
         urlModel.addObject("url", url);
 
@@ -47,7 +47,7 @@ public class AdminController {
     public String upload(Locale locale, Model model) throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         model.addAttribute("upload", "admin/upload");
         flickrService.upload();
-        photoset.refreshPhotoSet();
+        photoService.refreshPhotoList();
 
         return "redirect:/admin";
     }
@@ -55,11 +55,7 @@ public class AdminController {
     @RequestMapping(value = "delete", method = RequestMethod.GET)
     public ModelAndView delete() throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         ModelAndView photoModel = new ModelAndView("admin/delete");
-        photoModel.addObject("mediumModel", photoset.getMediumUrl());
-        photoModel.addObject("largeModel", photoset.getLargeUrl());
-        photoModel.addObject("titleModel", photoset.getTitle());
-//        flickrService.delete();
-//        photoset.refreshPhotoSet();
+        photoModel.addObject("myPhotoList", photoService.getMyPhotoList());
 
         return photoModel;
     }

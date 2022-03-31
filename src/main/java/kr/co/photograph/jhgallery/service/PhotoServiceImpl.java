@@ -1,84 +1,61 @@
 package kr.co.photograph.jhgallery.service;
 
-import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
-import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
+import kr.co.photograph.jhgallery.component.Flickr;
+import kr.co.photograph.jhgallery.model.MyPhoto;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 
 @Getter
 @Service
+@RequiredArgsConstructor
 public class PhotoServiceImpl implements PhotoService {
 
-    private final String apikey;
-    private final String secret;
-    private final String userId;
     private final Flickr flickr;
+    private ArrayList<MyPhoto> myPhotoList = new ArrayList<>();
 
-    public PhotoServiceImpl(@Value("${flickr.apikey}") String apikey,
-                            @Value("${flickr.secret}") String secret,
-                            @Value("${flickr.userId}") String userId) {
-        this.apikey = apikey;
-        this.secret = secret;
-        this.userId = userId;
-        flickr = new Flickr(apikey, secret, new REST());
+    @PostConstruct
+    void init() throws FlickrException {
+        this.myPhotoList = searchToMyPhoto();
     }
 
     @Override
-    public ArrayList<String> search(PhotoList<Photo> photoList, String option) throws FlickrException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        Iterator photoIterator = photoList.iterator();
-        ArrayList<String> returnList = new ArrayList<>();
-        Photo photo;
-        String selectedOption;
-        if(option.equals("Large")) {
-            selectedOption = "getLargeUrl";
-        }
-        else if(option.equals("Medium")) {
-            selectedOption = "getMediumUrl";
-        }
-        else if(option.equals("Title")) {
-            selectedOption = "getTitle";
-        }
-        else if(option.equals("Id")) {
-            selectedOption = "getId";
-        }
-        else {
-            System.out.println("Check your option");
-            return null;
-        }
-        Method method = Photo.class.getDeclaredMethod(selectedOption);
-        method.setAccessible(true);
-        while (photoIterator.hasNext()) {
-            photo = (Photo) photoIterator.next();
+    public ArrayList<MyPhoto> searchToMyPhoto() throws FlickrException {
+        int index = 0;
+        PhotoList<Photo> searchedPhotoList = searchByUserId();
+        for (Photo photo : searchedPhotoList) {
+            myPhotoList.add(index, new MyPhoto(
+                    photo.getId(),
+                    photo.getLargeUrl(),
+                    photo.getMediumUrl(),
+                    photo.getTitle(),
+                    index));
 
-            returnList.add((method.invoke(photo).toString()));
+            index++;
         }
-        return returnList;
+
+        return myPhotoList;
     }
 
     @Override
     public PhotoList<Photo> searchByUserId() throws FlickrException {
         SearchParameters searchParameters = new SearchParameters();
-        searchParameters.setUserId(userId);
+        searchParameters.setUserId(flickr.getUserId());
 
-        PhotoList<Photo> photoList = flickr.getPhotosInterface().search(searchParameters, 500, 0);
+        PhotoList<Photo> photoList = flickr.getFlickr().getPhotosInterface().search(searchParameters, 500, 0);
         return photoList;
     }
 
     @Override
-    public ArrayList<String> getImages(String option) throws FlickrException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        PhotoList<Photo> photoList = searchByUserId();
-        ArrayList<String> returnList = search(photoList, option);
-        return returnList;
+    public void refreshPhotoList() throws FlickrException {
+        this.myPhotoList = searchToMyPhoto();
     }
 }

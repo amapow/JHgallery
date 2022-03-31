@@ -1,6 +1,5 @@
 package kr.co.photograph.jhgallery.service;
 
-import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.RequestContext;
@@ -13,9 +12,9 @@ import com.flickr4java.flickr.util.AuthStore;
 import com.flickr4java.flickr.util.FileAuthStore;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuth1Token;
+import kr.co.photograph.jhgallery.component.Flickr;
 import lombok.Getter;
 import org.scribe.model.Verifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,26 +23,18 @@ import java.io.IOException;
 @Getter
 @Service
 public class FlickerServiceAdmin implements FlickrService {
-    private final String apikey;
-    private final String secret;
-    private final String userId;
-    private final Flickr flickr;
-    private final String url;
+    private final String authUrl;
     private final AuthInterface authInterface;
     private final OAuth1RequestToken requestToken;
+    private final Flickr flickr;
     private AuthStore authStore;
     private Auth auth;
 
-    public FlickerServiceAdmin(@Value("${flickr.apikey}") String apikey,
-                               @Value("${flickr.secret}") String secret,
-                               @Value("${flickr.userId}") String userId) {
-        this.apikey = apikey;
-        this.secret = secret;
-        this.userId = userId;
-        authInterface = new AuthInterface(apikey, secret, new REST());
+    public FlickerServiceAdmin(kr.co.photograph.jhgallery.component.Flickr flickr) {
+        authInterface = new AuthInterface(flickr.getApikey(), flickr.getSecret(), new REST());
         requestToken = authInterface.getRequestToken();
-        url = authInterface.getAuthorizationUrl(this.requestToken, Permission.DELETE);
-        flickr = new Flickr(apikey, secret, new REST());
+        authUrl = authInterface.getAuthorizationUrl(this.requestToken, Permission.DELETE);
+        this.flickr = flickr;
     }
 
     @Override
@@ -61,7 +52,7 @@ public class FlickerServiceAdmin implements FlickrService {
     public void upload() throws FlickrException{
         File file = new File("/Users/janghyeon/Pictures/8a7ca600f906.jpeg");
 
-        Uploader uploader = flickr.getUploader();
+        Uploader uploader = flickr.getFlickr().getUploader();
         RequestContext.getRequestContext().setAuth(auth);
         UploadMetaData uploadMetaData = new UploadMetaData();
         uploadMetaData.setPublicFlag(true);
@@ -73,6 +64,6 @@ public class FlickerServiceAdmin implements FlickrService {
     @Override
     public void delete() throws FlickrException {
         RequestContext.getRequestContext().setAuth(auth);
-        flickr.getPhotosInterface().delete("51971212675");
+        flickr.getFlickr().getPhotosInterface().delete("51971212675");
     }
 }
