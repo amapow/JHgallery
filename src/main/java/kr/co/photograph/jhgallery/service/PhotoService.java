@@ -5,7 +5,6 @@ import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import kr.co.photograph.jhgallery.model.MyPhoto;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public interface PhotoService {

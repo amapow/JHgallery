@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Janghyeon Jung</title>
+</head>
+<body>
+    <a th:href = "@{${url}}" target = "_blank"> Get TokenKey </a>
+    <form name = "getToken" method = "POST" th:action = "@{/admin/auth}">
+        <input name = "token" type = "text" placeholder="token" class="form-control">
+        <button name = "getAuth" value = "getAuth">OK</button>
+    </form>
+</body>
+</html>
