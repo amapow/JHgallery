@@ -1,40 +1,31 @@
 package kr.co.photograph.jhgallery.contoller;
 
-import kr.co.photograph.jhgallery.service.PhotoService;
+import kr.co.photograph.jhgallery.service.photoservice.PhotoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Locale;
-
+@Slf4j
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
 public class MainController {
 
-    private final PhotoService photoService;
+    private final PhotoService photoServiceMain;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public ModelAndView home_1() throws Exception {
-        photoService.refreshPhotoList();
+        photoServiceMain.refreshPhotoList();
         ModelAndView photoModel = new ModelAndView("home");
-        photoModel.addObject("myPhotoList", photoService.getMyPhotoList());
+        photoModel.addObject("myPhotoList", photoServiceMain.getMyPhotoList());
         return photoModel;
     }
 
-    @RequestMapping(value = "about", method = RequestMethod.GET)
-    public String about(Locale locale, Model model) {
-        model.addAttribute("about", "about");
-        return "about";
-    }
-
-
-    @RequestMapping(value = "contact", method = RequestMethod.GET)
-    public String contact(Locale locale, Model model) {
-        model.addAttribute("contact", "contact");
+    @GetMapping("contact")
+    public String contact() {
         return "contact";
     }
 }

@@ -4,9 +4,9 @@
 </head>
 <body>
     <a th:href = "@{${url}}" target = "_blank"> Get TokenKey </a>
-    <form name = "getToken" method = "POST" th:action = "@{/admin/auth}">
+    <form name = "getTokenForm" method = "POST" th:action = "@{/admin/auth}">
         <input name = "token" type = "text" placeholder="token" class="form-control">
-        <button name = "getAuth" value = "getAuth">OK</button>
+        <input type="submit" value="확인">
     </form>
 </body>
 </html>

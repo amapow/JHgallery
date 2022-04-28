@@ -1,4 +1,4 @@
-package kr.co.photograph.jhgallery.service;
+package kr.co.photograph.jhgallery.service.photoservice;
 
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.photos.Photo;

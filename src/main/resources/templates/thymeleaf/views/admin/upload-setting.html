@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>사진 설정</h2>
+    </div>
+    <form th:action="@{upload/setting}" method="post">
+        <div th:each="photo : ${photos.uploadPhotos}" th:object="${photo}">
+            <img th:src="|images/*{storePhotoName}|" width="400" height="300"/>
+            <span>
+                <label>Title</label>
+                <input type="text" th:name="title" th:value="*{title}"/>
+            </span>
+            <span th:each="permission: ${flag}">
+                <label th:for="${#ids.next('permissionFlag')}" th:text="${permission.value}"></label>
+                <input type="radio" th:name="|flag${photoStat.index}|" th:value="${permission.name()}"/>
+            </span>
+
+        </div>
+        <input type="submit" value="확인">
+    </form>
+
+
+</div> <!-- /container -->
+</body>
+</html>

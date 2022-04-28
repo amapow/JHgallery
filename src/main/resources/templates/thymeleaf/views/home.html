@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- ========== Meta Tags ========== -->
     <meta charset="UTF-8">
@@ -67,12 +67,9 @@
                             <li data-filter=".Untitled"><a href="javascript:void(0)">Untitled</a></li>
                         </ul>
                     </div>
-                    <li>
-                        <sec:authorize access="hasRole('ROLE_ADMIN')">
-                            <a href=/admin>Admin</a>
-                        </sec:authorize>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a href="/admin">Admin</a>
                     </li>
-                    <br>
                     <br>
                     <br>
                     <li>
@@ -102,12 +99,12 @@
                                 document.write(new Date().getFullYear());
                             </script>
                             ,
-                            <sec:authorize access="isAnonymous()">
+                            <span sec:authorize="isAnonymous()">
                                 <a href=/login>Janghyeon Jung</a>
-                            </sec:authorize>
-                            <sec:authorize access="isAuthenticated()">
+                            </span>
+                            <span sec:authorize="isAuthenticated()">
                                 <a href=/logout>Janghyeon Jung</a>
-                            </sec:authorize>
+                            </span>
                             All rights reserved</br>with <a href="https://colorlib.com">Colorlib</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

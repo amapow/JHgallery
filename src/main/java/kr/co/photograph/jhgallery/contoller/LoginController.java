@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @AllArgsConstructor
-public class LoginContoller {
+@RequestMapping("")
+public class LoginController {
     private MemberService memberService;
 
     @GetMapping("/user/signup")
@@ -27,7 +28,7 @@ public class LoginContoller {
 
     @GetMapping("/login/result")
     public String dispLoginResult() {
-        return "/user/loginSuccess";
+        return "redirect:/";
     }
 
     @GetMapping("/logout/result")

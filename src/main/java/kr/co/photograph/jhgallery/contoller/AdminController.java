@@ -2,16 +2,15 @@ package kr.co.photograph.jhgallery.contoller;
 
 
 import com.flickr4java.flickr.FlickrException;
-import kr.co.photograph.jhgallery.service.FlickrService;
-import kr.co.photograph.jhgallery.service.PhotoService;
+import kr.co.photograph.jhgallery.service.authservice.FlickrAuthService;
+import kr.co.photograph.jhgallery.service.flickrservice.FlickrService;
+import kr.co.photograph.jhgallery.service.photoservice.PhotoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -19,52 +18,44 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    private final FlickrAuthService flickrAuthService;
     private final FlickrService flickrService;
-    private final PhotoService photoService;
+    private final PhotoService photoServiceAdmin;
+    private final PhotoService photoServiceMain;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String admin() {
-        return "admin/admin";
+    @GetMapping
+    public String admin(Model model) throws FlickrException {
+        model.addAttribute("myPhotoList", photoServiceAdmin.getMyPhotoList());
+        photoServiceAdmin.refreshPhotoList();
+        return "/admin/admin";
     }
 
-    @RequestMapping(value = "auth", method = RequestMethod.GET)
-    public ModelAndView setUrl() throws Exception {
-        final String url = flickrService.getAuthUrl();
-        ModelAndView urlModel = new ModelAndView("admin/auth");
-        urlModel.addObject("url", url);
-
-        return urlModel;
+    @GetMapping("auth")
+    public String setUrl(Model model) {
+        String url = flickrAuthService.getAuthUrl();
+        model.addAttribute("url", url);
+        return "/admin/auth";
     }
 
-    @RequestMapping(value = "getAuth", method = RequestMethod.POST)
-    public String getAuth(String token) throws FlickrException, IOException {
-        flickrService.authorize(token);
-
+    @PostMapping("auth")
+    public String getAuth(@RequestParam("token") String token) throws FlickrException {
+        System.out.println(token);
+        flickrAuthService.authorize(token);
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "upload", method = RequestMethod.GET)
-    public String upload(Locale locale, Model model) throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        model.addAttribute("upload", "admin/upload");
-        flickrService.upload();
-        photoService.refreshPhotoList();
-
-        return "redirect:/admin";
+    @GetMapping("delete")
+    public String delete(Model model) throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        model.addAttribute("myPhotoList", photoServiceAdmin.getMyPhotoList());
+        return "admin/delete";
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.GET)
-    public ModelAndView delete() throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        ModelAndView photoModel = new ModelAndView("admin/delete");
-        photoModel.addObject("myPhotoList", photoService.getMyPhotoList());
-
-        return photoModel;
-    }
-
-    @RequestMapping(value = "delete/result", method = {RequestMethod.GET})
+    @PostMapping("delete")
     public String deleteItem(@RequestParam String id) {
         String[] deleteStringId = id.split(",");
         ArrayList<String> deleteIdArray = new ArrayList<>();
@@ -73,7 +64,7 @@ public class AdminController {
                 deleteIdArray.add(item);
             }
             flickrService.delete(deleteIdArray);
-            photoService.refreshPhotoList();
+            photoServiceAdmin.refreshPhotoList();
         } catch (NullPointerException e) {
             e.printStackTrace();
             System.out.println("삭제 항목을 재선택 하세용");
@@ -84,28 +75,15 @@ public class AdminController {
         return "redirect:/admin/delete";
     }
 
+    @GetMapping("/home")
+    public String toHome() {
+        return "redirect:/";
+    }
+    
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public String missingDeleteItemParams(MissingServletRequestParameterException e) {
         String id = e.getParameterName();
         System.out.println(id + " parameter is missing");
-        return "redirect:";
-    }
-
-
-//    @RequestMapping(value = "authConfig", method = RequestMethod.GET)
-//    public ModelAndView authConfig() throws Exception {
-//        RequestContext.getRequestContext().setAuth(flickrService.getAuthStore().retrieve(flickrService.getUserId()));
-//        kr.co.photograph.jhgallery.model.Photo photo = new Photo();
-//        ModelAndView photoModel = new ModelAndView("admin/authConfig");
-//        photoModel.addObject("mediumModel", photo.getMediumUrl());
-//        photoModel.addObject("titleModel", photo.getTitle());
-//
-//        return photoModel;
-//    }
-
-    @RequestMapping(value = "categoryConfig", method = RequestMethod.GET)
-    public String categoryConfig(Locale locale, Model model) {
-        model.addAttribute("categoryConfig", "categoryConfig");
-        return "admin/categoryConfig";
+        return "redirect:/admin";
     }
 }

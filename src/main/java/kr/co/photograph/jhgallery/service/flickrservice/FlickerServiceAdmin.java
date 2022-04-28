@@ -1,17 +1,20 @@
-package kr.co.photograph.jhgallery.service;
+package kr.co.photograph.jhgallery.service.flickrservice;
 
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.RequestContext;
 import com.flickr4java.flickr.uploader.UploadMetaData;
 import com.flickr4java.flickr.uploader.Uploader;
 import kr.co.photograph.jhgallery.component.Flickr;
+import kr.co.photograph.jhgallery.service.authservice.FlickrAuthService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
 
+@Slf4j
 @Getter
 @Service
 @RequiredArgsConstructor
@@ -20,15 +23,18 @@ public class FlickerServiceAdmin implements FlickrService {
     private final FlickrAuthService flickrAuthService;
 
     @Override
-    public void upload() throws FlickrException{
-        File file = new File("/Users/janghyeon/Pictures/8a7ca600f906.jpeg");
-
+    public void upload(String fileName, String title, String flag) throws FlickrException{
+        log.info("filename = {}", fileName);
+        File file = new File(fileName);
         Uploader uploader = flickr.getFlickr().getUploader();
         RequestContext.getRequestContext().setAuth(flickrAuthService.getAuth());
         UploadMetaData uploadMetaData = new UploadMetaData();
-        uploadMetaData.setPublicFlag(true);
-        uploadMetaData.setTitle("Photo upload Test");
-
+        uploadMetaData.setTitle(title);
+        if (flag.equals("PUBLIC")) {
+            uploadMetaData.setPublicFlag(true);
+        } else {
+            uploadMetaData.setHidden(true);
+        }
         uploader.upload(file, uploadMetaData);
     }
 

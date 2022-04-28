@@ -1,4 +1,4 @@
-package kr.co.photograph.jhgallery.service;
+package kr.co.photograph.jhgallery.service.photoservice;
 
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.photos.Photo;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @Getter
 @Service
 @RequiredArgsConstructor
-public class PhotoServiceImpl implements PhotoService {
+public class PhotoServiceAdmin implements PhotoService {
 
     private final Flickr flickr;
     private ArrayList<MyPhoto> myPhotoList = new ArrayList<>();
@@ -38,10 +38,8 @@ public class PhotoServiceImpl implements PhotoService {
                     photo.getMediumUrl(),
                     photo.getTitle(),
                     index));
-
             index++;
         }
-
         return myPhotoList;
     }
 
@@ -49,7 +47,6 @@ public class PhotoServiceImpl implements PhotoService {
     public PhotoList<Photo> searchByUserId() throws FlickrException {
         SearchParameters searchParameters = new SearchParameters();
         searchParameters.setUserId(flickr.getUserId());
-        searchParameters.setPrivacyFilter(1);
 
         PhotoList<Photo> photoList = flickr.getFlickr().getPhotosInterface().search(searchParameters, 500, 0);
         return photoList;

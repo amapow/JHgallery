@@ -88,12 +88,16 @@
                     <div class="container-fluid">
                         <div class="grid img-container justify-content-center no-gutters">
                             <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
-                            <div class="grid-item col-sm-12 col-md-6 col-lg-3">
+                            <div th:each="myPhoto : ${myPhotoList}"
+                                 class="grid-item col-sm-12 col-md-6 col-lg-3">
+                                <!-- Image URL 출력 시작 -->
                                     <div class="project_box_one">
+                                        <img th:src="@{${myPhoto.getMediumUrl()}}"/>
                                         <div class="product_info">
                                         </div>
                                     </div>
                                 </a>
+                                <!-- Image URL 출력 끝 -->
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-package kr.co.photograph.jhgallery.service;
+package kr.co.photograph.jhgallery.service.authservice;
 
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
@@ -13,8 +13,8 @@ import lombok.Getter;
 import org.scribe.model.Verifier;
 import org.springframework.stereotype.Service;
 
-@Service
 @Getter
+@Service
 public class FlickrAuthServiceImpl implements FlickrAuthService {
 
     private final Flickr flickr;
