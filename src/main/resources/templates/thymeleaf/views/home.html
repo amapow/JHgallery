@@ -24,7 +24,7 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <!-- Custom styles for this template -->
-    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
 </head>
 <body>
 <div class="loader">
@@ -53,14 +53,13 @@
             <!--main menu -->
             <div class="side_menu_section">
                 <ul class="menu_nav">
-                    <li>
-                        <a href="">
-                            Archive
-                        </a>
-                    </li>
                     <div class="side_menu_section">
                         <h4 class="side_title"><b>Project</b></h4>
                         <ul id="filtr-container" class="filter_nav">
+                            <script th:inline="javascript">
+
+                            </script>
+                            <li data-filter=""><a href="javascript:void(0)">Archive</a></li>
                             <li data-filter=".OMC"><a href="javascript:void(0)">Old man's cave</a></li>
                             <li data-filter=".TLR"><a href="javascript:void(0)">The last romance in SEOUL</a></li>
                             <li data-filter=".NULL"><a href="javascript:void(0)">NULL</a></li>
@@ -122,15 +121,17 @@
                 <div class="container-fluid">
                     <div class="grid img-container justify-content-center no-gutters">
                         <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
-                        <div th:each="myPhoto : ${myPhotoList}"
-                             th:classappend="${myPhoto.getTitle()}"
+                        <div th:each="myPhoto : ${photoRepository}"
+                             th:classappend="${myPhoto.value.getTitle()}"
                                 class="grid-item col-sm-12 col-md-6 col-lg-3">
                             <!-- Image URL 출력 시작 -->
                             <!-- 클릭하면 출력되는 큰 이미지 -->
-                            <a th:href="@{${myPhoto.getLargeUrl()}}">
+                            <a th:href="@{${myPhoto.value.getLargeUrl()}}">
                                 <!--title="project name 1">-->
                                 <div class="project_box_one">
-                                    <img th:src="@{${myPhoto.getMediumUrl()}}"/>
+                                    <span>
+                                        <img th:src="@{${myPhoto.value.getMediumUrl()}}"/>
+                                    </span>
                                     <div class="product_info">
                                     </div>
                                 </div>

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public interface PhotoService {
     PhotoList<Photo> searchByUserId() throws FlickrException;
-    ArrayList<MyPhoto> getMyPhotoList();
-    ArrayList<MyPhoto> searchToMyPhoto() throws FlickrException;
+    void searchToMyPhoto() throws FlickrException;
     void refreshPhotoList() throws FlickrException;
 }

@@ -5,7 +5,9 @@ import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
 import kr.co.photograph.jhgallery.component.Flickr;
+import kr.co.photograph.jhgallery.domain.Flag;
 import kr.co.photograph.jhgallery.model.MyPhoto;
+import kr.co.photograph.jhgallery.repository.PhotoRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,27 +22,27 @@ import java.util.ArrayList;
 public class PhotoServiceAdmin implements PhotoService {
 
     private final Flickr flickr;
-    private ArrayList<MyPhoto> myPhotoList = new ArrayList<>();
+    private final PhotoRepository photoRepository;
 
-    @PostConstruct
-    void init() throws FlickrException {
-        this.myPhotoList = searchToMyPhoto();
-    }
 
     @Override
-    public ArrayList<MyPhoto> searchToMyPhoto() throws FlickrException {
-        int index = 0;
+    public void searchToMyPhoto() throws FlickrException {
+        String flag;
         PhotoList<Photo> searchedPhotoList = searchByUserId();
         for (Photo photo : searchedPhotoList) {
-            myPhotoList.add(index, new MyPhoto(
+            if (photo.isPublicFlag()) {
+                flag = Flag.PUBLIC.toString();
+            } else {
+                flag = Flag.PRIVATE.toString();
+            }
+            photoRepository.save(new MyPhoto(
                     photo.getId(),
                     photo.getLargeUrl(),
                     photo.getMediumUrl(),
                     photo.getTitle(),
-                    index));
-            index++;
+                    flag
+            ));
         }
-        return myPhotoList;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class PhotoServiceAdmin implements PhotoService {
 
     @Override
     public void refreshPhotoList() throws FlickrException {
-        myPhotoList.clear();
-        this.myPhotoList = searchToMyPhoto();
+        photoRepository.clear();
+        searchToMyPhoto();
     }
 }

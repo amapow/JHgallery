@@ -12,19 +12,19 @@
     <!--<link rel="icon" href="fav.ico">-->
     <!-- ========== STYLESHEETS ========== -->
     <!-- Bootstrap CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Fonts Icon CSS -->
-    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../assets/css/et-line.css" rel="stylesheet">
-    <link href="../assets/css/ionicons.min.css" rel="stylesheet">
+    <link href="../../assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../assets/css/et-line.css" rel="stylesheet">
+    <link href="../../assets/css/ionicons.min.css" rel="stylesheet">
     <!-- Carousel CSS -->
-    <link href="../assets/css/slick.css" rel="stylesheet">
+    <link href="../../assets/css/slick.css" rel="stylesheet">
     <!-- Magnific-popup -->
-    <link rel="stylesheet" href="../assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="../../assets/css/magnific-popup.css">
     <!-- Animate CSS -->
-    <link rel="stylesheet" href="../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.min.css">
     <!-- Custom styles for this template -->
-    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../../assets/css/main.css" rel="stylesheet">
 </head>
 <body>
 <div class="loader">
@@ -140,13 +140,21 @@
                     <div class="grid img-container justify-content-center no-gutters">
                         <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
 
-                        <form id="urlSend" th:action="@{/admin/delete}" method="POST">
+                        <form id="urlSend" th:action="@{/admin/photo/config}" method="POST">
                             <div th:each="myPhoto : ${photoRepository}"
                                  th:classappend="${myPhoto.value.getTitle()}"
                                  class="grid-item col-sm-12 col-md-6 col-lg-3">
                                 <span>
                                     <img th:src="@{${myPhoto.value.getMediumUrl()}}"/>
-                                    <input size="150" type="checkbox" name="id" th:value="${myPhoto.value.getId()}" align="center"/><!-- alt="pro1" />-->
+                                    <span th:each="permission: ${flag}">
+                                        <label th:for="${#ids.next('permissionFlag')}" th:text="${permission.value}"></label>
+                                        <input type="radio" th:name="|flag${myPhotoStat.index}|"
+                                               th:attr="checked=${myPhoto.value.getFlag()} == ${permission.name()} ? 'true' : 'false'" th:value="${permission.name()}"/>
+                                    </span>
+                                    <span>
+                                        <label th:name="title"></label>
+                                        <input type="text" name="title" th:value="${myPhoto.value.getTitle()}">
+                                    </span>
                                     <br>
                                     <br>
                                 </span>
@@ -155,38 +163,38 @@
                             </div>
 
                     </div>
-                    <input type="submit" value="삭제">
+                    <input type="submit" value="수정">
                     </form>
+                </div>
             </div>
+
         </div>
+        <!--=================== side menu end====================-->
+        <!--=================== content body====================-->
+        <!--=================== masaonry portfolio====================-->
 
+        <!--=================== masaonry portfolio end====================-->
+        <!--=================== content body end ====================-->
     </div>
-    <!--=================== side menu end====================-->
-    <!--=================== content body====================-->
-    <!--=================== masaonry portfolio====================-->
-
-    <!--=================== masaonry portfolio end====================-->
-    <!--=================== content body end ====================-->
-</div>
 </div>
 <!-- jquery -->
-<script src="../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/jquery.min.js"></script>
 <!-- bootstrap -->
-<script src="../assets/js/popper.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/waypoints.min.js"></script>
+<script src="../../assets/js/popper.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/waypoints.min.js"></script>
 <!--slick carousel -->
-<script src="../assets/js/slick.min.js"></script>
+<script src="../../assets/js/slick.min.js"></script>
 <!--Portfolio Filter-->
-<script src="../assets/js/imgloaded.js"></script>
-<script src="../assets/js/isotope.js"></script>
+<script src="../../assets/js/imgloaded.js"></script>
+<script src="../../assets/js/isotope.js"></script>
 <!-- Magnific-popup -->
-<script src="../assets/js/jquery.magnific-popup.min.js"></script>
+<script src="../../assets/js/jquery.magnific-popup.min.js"></script>
 <!--Counter-->
-<script src="../assets/js/jquery.counterup.min.js"></script>
+<script src="../../assets/js/jquery.counterup.min.js"></script>
 <!-- WOW JS -->
-<script src="../assets/js/wow.min.js"></script>
+<script src="../../assets/js/wow.min.js"></script>
 <!-- Custom js -->
-<script src="../assets/js/main.js"></script>
+<script src="../../assets/js/main.js"></script>
 </body>
 </html>

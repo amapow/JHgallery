@@ -5,9 +5,12 @@ import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
 import kr.co.photograph.jhgallery.component.Flickr;
+import kr.co.photograph.jhgallery.domain.Flag;
 import kr.co.photograph.jhgallery.model.MyPhoto;
+import kr.co.photograph.jhgallery.repository.PhotoRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -17,30 +20,31 @@ import java.util.ArrayList;
 @Getter
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PhotoServiceMain implements PhotoService {
 
     private final Flickr flickr;
-    private ArrayList<MyPhoto> myPhotoList = new ArrayList<>();
-
-    @PostConstruct
-    void init() throws FlickrException {
-        this.myPhotoList = searchToMyPhoto();
-    }
+    private final PhotoRepository photoRepository;
 
     @Override
-    public ArrayList<MyPhoto> searchToMyPhoto() throws FlickrException {
-        int index = 0;
+    public void searchToMyPhoto() throws FlickrException {
         PhotoList<Photo> searchedPhotoList = searchByUserId();
+        String flag;
         for (Photo photo : searchedPhotoList) {
-            myPhotoList.add(index, new MyPhoto(
+            if (photo.isPublicFlag()) {
+                flag = Flag.PUBLIC.toString();
+            } else {
+                flag = Flag.PRIVATE.toString();
+            }
+            photoRepository.save(new MyPhoto(
                     photo.getId(),
                     photo.getLargeUrl(),
                     photo.getMediumUrl(),
                     photo.getTitle(),
-                    index));
-            index++;
+                    flag
+            ));
+
         }
-        return myPhotoList;
     }
 
     @Override
@@ -55,7 +59,7 @@ public class PhotoServiceMain implements PhotoService {
 
     @Override
     public void refreshPhotoList() throws FlickrException {
-        myPhotoList.clear();
-        this.myPhotoList = searchToMyPhoto();
+        photoRepository.clear();
+        searchToMyPhoto();
     }
 }

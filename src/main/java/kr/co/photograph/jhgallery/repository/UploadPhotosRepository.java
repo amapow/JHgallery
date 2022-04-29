@@ -5,13 +5,14 @@ import kr.co.photograph.jhgallery.domain.UploadPhotos;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class UploadPhotosRepository {
 
-    private final Map<Integer, UploadPhotos> store = new HashMap<>();
+    private final Map<Integer, UploadPhotos> store = new LinkedHashMap<>();
     private int key = 0;
 
     public void save(UploadPhotos uploadPhoto) {
@@ -20,5 +21,9 @@ public class UploadPhotosRepository {
 
     public UploadPhotos findAll() {
         return store.get(key);
+    }
+
+    public void clear() {
+        store.clear();
     }
 }

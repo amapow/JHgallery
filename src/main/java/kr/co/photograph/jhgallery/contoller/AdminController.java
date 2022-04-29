@@ -2,6 +2,7 @@ package kr.co.photograph.jhgallery.contoller;
 
 
 import com.flickr4java.flickr.FlickrException;
+import kr.co.photograph.jhgallery.repository.PhotoRepository;
 import kr.co.photograph.jhgallery.service.authservice.FlickrAuthService;
 import kr.co.photograph.jhgallery.service.flickrservice.FlickrService;
 import kr.co.photograph.jhgallery.service.photoservice.PhotoService;
@@ -26,11 +27,13 @@ public class AdminController {
     private final FlickrAuthService flickrAuthService;
     private final FlickrService flickrService;
     private final PhotoService photoServiceAdmin;
-    private final PhotoService photoServiceMain;
+    private final PhotoRepository photoRepository;
+
 
     @GetMapping
     public String admin(Model model) throws FlickrException {
-        model.addAttribute("myPhotoList", photoServiceAdmin.getMyPhotoList());
+//        model.addAttribute("myPhotoList", photoServiceAdmin.getMyPhotoList());
+        model.addAttribute("photoRepository", photoRepository.getPhotoStore());
         photoServiceAdmin.refreshPhotoList();
         return "/admin/admin";
     }
@@ -51,7 +54,7 @@ public class AdminController {
 
     @GetMapping("delete")
     public String delete(Model model) throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        model.addAttribute("myPhotoList", photoServiceAdmin.getMyPhotoList());
+        model.addAttribute("photoRepository", photoRepository.getPhotoStore());
         return "admin/delete";
     }
 

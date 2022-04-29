@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -31,8 +32,6 @@ import java.util.List;
 public class UploadController {
 
     private final FlickrService flickrService;
-    private final PhotoService photoServiceAdmin;
-    private final PhotoService photoServiceMain;
     private final FileStore fileStore;
     private final UploadPhotosRepository uploadPhotoRepository;
 
@@ -55,12 +54,9 @@ public class UploadController {
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
         return new UrlResource("file:" + fileStore.getFullPath(filename));
-
-
     }
 
 
-    @ResponseBody
     @PostMapping("/upload/setting")
     public String uploadSetting(@RequestParam String title, HttpServletRequest request) throws FlickrException {
         String[] getTitle = title.split(",");
@@ -69,8 +65,10 @@ public class UploadController {
         uploadPhotoSetting(getTitle, flag, uploadPhotos);
         for (UploadPhoto uploadPhoto : uploadPhotos) {
             flickrService.upload(getFullPath(uploadPhoto.getStorePhotoName()), uploadPhoto.getTitle(), uploadPhoto.getPermissionFlag());
+            new File(getFullPath(uploadPhoto.getStorePhotoName())).delete();
         }
-        return "ok";
+        uploadPhotoRepository.clear();
+        return "redirect:/admin";
     }
 
     private String getFullPath(String uploadPhoto) {
@@ -91,12 +89,4 @@ public class UploadController {
         }
         return getFlag;
     }
-
-//    public String upload() throws IOException, FlickrException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-//        flickrService.upload();
-//        photoServiceMain.refreshPhotoList();
-//        return "redirect:/admin";
-//    }
-
-
 }
