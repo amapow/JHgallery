@@ -8,7 +8,7 @@
     <meta name="author" content="Pharaohlab">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- ========== Title ========== -->
-    <title> Cocoon -Portfolio</title>
+    <category> Cocoon -Portfolio</category>
     <!-- ========== Favicon Ico ========== -->
     <!--<link rel="icon" href="fav.ico">-->
     <!-- ========== STYLESHEETS ========== -->
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="widget widget_categories">
-                                <h4 class="widget-title">
+                                <h4 class="widget-category">
                                     Categories
                                 </h4>
                                 <ul>
@@ -151,7 +151,7 @@
                                 </ul>
                             </div>
                             <div class="widget widget_instagram">
-                                <h4 class="widget-title">
+                                <h4 class="widget-category">
                                     Instagram
                                 </h4>
                                 <ul>
@@ -164,7 +164,7 @@
                                 </ul>
                             </div>
                             <div class="widget widget_tags">
-                                <h4 class="widget-title">
+                                <h4 class="widget-category">
                                     Tags
                                 </h4>
                                 <ul>
@@ -182,7 +182,7 @@
                     <div class="col-lg-8 col-md-12 col-12">
                         <article class="blog_card">
                             <div class="blog_card_top">
-                                <img src="assets/img/blog/blog1.png" alt="blog title " />
+                                <img src="assets/img/blog/blog1.png" alt="blog category " />
                                 <div class="blog_date">
                                     31
                                     <span>
@@ -208,7 +208,7 @@
                         </article>
                         <article class="blog_card">
                             <div class="blog_card_top">
-                                <img src="assets/img/blog/blog2.png" alt="blog title " />
+                                <img src="assets/img/blog/blog2.png" alt="blog category " />
                                 <div class="blog_date">
                                     31
                                     <span>
@@ -234,7 +234,7 @@
                         </article>
                         <article class="blog_card">
                             <div class="blog_card_top">
-                                <img src="assets/img/blog/blog3.png" alt="blog title " />
+                                <img src="assets/img/blog/blog3.png" alt="blog category " />
                                 <div class="blog_date">
                                     31
                                     <span>

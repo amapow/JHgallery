@@ -18,6 +18,15 @@ public class PhotoRepository {
         photoStore.put(index++, myPhoto);
     }
 
+    public MyPhoto findById(String id) {
+        for (MyPhoto value : photoStore.values()) {
+            if (value.getId().equals(id)) {
+                return value;
+            }
+        }
+        return null;
+    }
+
     public void clear() {
         photoStore.clear();
     }

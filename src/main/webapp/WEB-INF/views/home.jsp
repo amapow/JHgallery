@@ -12,7 +12,7 @@
     <meta name="author" content="Pharaohlab">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- ========== Title ========== -->
-    <title>Janghyeon Jung</title>
+    <category>Janghyeon Jung</category>
     <!-- ========== Favicon Ico ========== -->
     <!--<link rel="icon" href="fav.ico">-->
     <!-- ========== STYLESHEETS ========== -->
@@ -137,8 +137,8 @@
                         %>
                         <div class="grid-item <%out.print(myPhotoArrayList.get(i).getTitle());%> col-sm-12 col-md-6 col-lg-3">
 
-<%--                            <a href="<%out.print(largeList.get(i));%>"> <!--title="project name 1">-->--%>
-                            <a href="<%out.print(myPhotoArrayList.get(i).getLargeUrl());%>"> <!--title="project name 1">-->
+<%--                            <a href="<%out.print(largeList.get(i));%>"> <!--category="project name 1">-->--%>
+                            <a href="<%out.print(myPhotoArrayList.get(i).getLargeUrl());%>"> <!--category="project name 1">-->
                                 <div class="project_box_one">
                                     <img src="<%out.print(myPhotoArrayList.get(i).getMediumUrl());%>"/><!-- alt="pro1" />-->
                                     <div class="product_info">

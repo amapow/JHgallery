@@ -7,7 +7,5 @@ import java.util.List;
 
 @Data
 public class PhotoForm {
-    private String title;
-    private int permissionFlag;
     private List<MultipartFile> uploadPhotos;
 }

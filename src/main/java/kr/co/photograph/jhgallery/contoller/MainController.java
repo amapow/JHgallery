@@ -1,6 +1,8 @@
 package kr.co.photograph.jhgallery.contoller;
 
+import kr.co.photograph.jhgallery.domain.Category;
 import kr.co.photograph.jhgallery.model.MyPhoto;
+import kr.co.photograph.jhgallery.repository.CategoryRepository;
 import kr.co.photograph.jhgallery.repository.PhotoRepository;
 import kr.co.photograph.jhgallery.service.photoservice.PhotoService;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +21,18 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MainController {
 
-    private final PhotoService photoServiceMain;
+    private final PhotoService photoServiceAdmin;
     private final PhotoRepository photoRepository;
+    private final CategoryRepository categoryRepository;
 
     @ModelAttribute
 
     @GetMapping
     public ModelAndView home_1() throws Exception {
-        photoServiceMain.refreshPhotoList();
+//        photoServiceAdmin.refreshPhotoList();
         Map<Integer, MyPhoto> photoStore = photoRepository.getPhotoStore();
         ModelAndView photoModel = new ModelAndView("home");
+        photoModel.addObject("categories", categoryRepository.getStore());
         photoModel.addObject("photoRepository", photoRepository.getPhotoStore());
         return photoModel;
     }

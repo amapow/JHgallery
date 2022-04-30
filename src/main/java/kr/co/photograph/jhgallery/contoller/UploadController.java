@@ -7,6 +7,7 @@ import kr.co.photograph.jhgallery.domain.Flag;
 import kr.co.photograph.jhgallery.domain.UploadPhoto;
 import kr.co.photograph.jhgallery.domain.UploadPhotos;
 import kr.co.photograph.jhgallery.file.FileStore;
+import kr.co.photograph.jhgallery.model.MyPhoto;
 import kr.co.photograph.jhgallery.repository.UploadPhotosRepository;
 import kr.co.photograph.jhgallery.service.flickrservice.FlickrService;
 import kr.co.photograph.jhgallery.service.photoservice.PhotoService;
@@ -34,6 +35,7 @@ public class UploadController {
     private final FlickrService flickrService;
     private final FileStore fileStore;
     private final UploadPhotosRepository uploadPhotoRepository;
+    private final PhotoService photoServiceAdmin;
 
     @GetMapping("/upload")
     public String uploadView() {
@@ -68,6 +70,7 @@ public class UploadController {
             new File(getFullPath(uploadPhoto.getStorePhotoName())).delete();
         }
         uploadPhotoRepository.clear();
+        photoServiceAdmin.refreshPhotoList();
         return "redirect:/admin";
     }
 

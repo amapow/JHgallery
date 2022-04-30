@@ -13,11 +13,12 @@
             <img th:src="|images/*{storePhotoName}|" width="400" height="300"/>
             <span>
                 <label>Title</label>
-                <input type="text" th:name="title" th:value="*{title}"/>
+                <input type="text" th:name="category" th:value="*{category}"/>
             </span>
             <span th:each="permission: ${flag}">
                 <label th:for="${#ids.next('permissionFlag')}" th:text="${permission.value}"></label>
-                <input type="radio" th:name="|flag${photoStat.index}|" th:value="${permission.name()}"/>
+                <input type="radio" th:attr="checked=${permission.name()} == 'PUBLIC' ? 'true' : 'false'"
+                       th:name="|flag${photoStat.index}|" th:value="${permission.name()}"/>
             </span>
 
         </div>

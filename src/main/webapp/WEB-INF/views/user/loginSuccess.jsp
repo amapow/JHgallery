@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Janghyeon Jung</title>
+    <category>Janghyeon Jung</category>
     <meta http-equiv="refresh" content="0; url=/">
 </head>
 <body>

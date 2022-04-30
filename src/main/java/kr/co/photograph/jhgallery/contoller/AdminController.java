@@ -34,7 +34,7 @@ public class AdminController {
     public String admin(Model model) throws FlickrException {
 //        model.addAttribute("myPhotoList", photoServiceAdmin.getMyPhotoList());
         model.addAttribute("photoRepository", photoRepository.getPhotoStore());
-        photoServiceAdmin.refreshPhotoList();
+//        photoServiceAdmin.refreshPhotoList();
         return "/admin/admin";
     }
 
@@ -49,6 +49,7 @@ public class AdminController {
     public String getAuth(@RequestParam("token") String token) throws FlickrException {
         System.out.println(token);
         flickrAuthService.authorize(token);
+        photoServiceAdmin.refreshPhotoList();
         return "redirect:/admin";
     }
 

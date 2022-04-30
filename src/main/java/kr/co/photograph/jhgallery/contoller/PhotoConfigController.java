@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -50,10 +51,12 @@ public class PhotoConfigController {
             flickrServiceAdmin.config(value, titleList.get(i), flag.get(i), photoStore);
             i++;
         }
+        photoServiceAdmin.refreshPhotoList();
         return "/admin/photo-config";
     }
 
     private List<String> getFlag(HttpServletRequest request, String[] getTitle) {
+
         List<String> getFlag = new ArrayList<>();
         for (int i = 0; i < getTitle.length; i++) {
             getFlag.add(request.getParameter("flag" + i));

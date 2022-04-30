@@ -7,7 +7,7 @@
     <meta name="author" content="Pharaohlab">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- ========== Title ========== -->
-    <title>Janghyeon Jung</title>
+    <category>Janghyeon Jung</category>
     <!-- ========== Favicon Ico ========== -->
     <!--<link rel="icon" href="fav.ico">-->
     <!-- ========== STYLESHEETS ========== -->
@@ -56,14 +56,8 @@
                     <div class="side_menu_section">
                         <h4 class="side_title"><b>Project</b></h4>
                         <ul id="filtr-container" class="filter_nav">
-                            <script th:inline="javascript">
-
-                            </script>
                             <li data-filter=""><a href="javascript:void(0)">Archive</a></li>
-                            <li data-filter=".OMC"><a href="javascript:void(0)">Old man's cave</a></li>
-                            <li data-filter=".TLR"><a href="javascript:void(0)">The last romance in SEOUL</a></li>
-                            <li data-filter=".NULL"><a href="javascript:void(0)">NULL</a></li>
-                            <li data-filter=".Untitled"><a href="javascript:void(0)">Untitled</a></li>
+                            <li th:each="category : ${categories}" th:attr="data-filter=${category.getTitle()}" data-filter="category"><a href="javascript:void(0)">[[${category.getFullTitle()}]]</a></li>
                         </ul>
                     </div>
                     <li sec:authorize="hasRole('ROLE_ADMIN')">
@@ -126,11 +120,11 @@
                                 class="grid-item col-sm-12 col-md-6 col-lg-3">
                             <!-- Image URL 출력 시작 -->
                             <!-- 클릭하면 출력되는 큰 이미지 -->
-                            <a th:href="@{${myPhoto.value.getLargeUrl()}}">
-                                <!--title="project name 1">-->
+                            <a th:if="${myPhoto.value.getFlag().equals('PUBLIC')}" th:href="@{${myPhoto.value.getLargeUrl()}}">
+                                <!--category="project name 1">-->
                                 <div class="project_box_one">
                                     <span>
-                                        <img th:src="@{${myPhoto.value.getMediumUrl()}}"/>
+                                        <img th:if="${myPhoto.value.getFlag().equals('PUBLIC')}" th:src="@{${myPhoto.value.getMediumUrl()}}"/>
                                     </span>
                                     <div class="product_info">
                                     </div>

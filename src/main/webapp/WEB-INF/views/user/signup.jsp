@@ -9,7 +9,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+    <category>Title</category>
 </head>
 <body>
 <h1>회원 가입</h1>
