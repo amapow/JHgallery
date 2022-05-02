@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Data
 public class Category {
 
-    private final String title;
-    private final String fullTitle;
+    private String title;
+    private String desc;
 }

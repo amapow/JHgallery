@@ -13,9 +13,13 @@ import java.util.List;
 public class CategoryRepository {
 
     private final List<Category> store = new ArrayList<>();
+    private static int sequence = 0;
 
     public void save(Category category) {
         store.add(category);
+    }
+    public void clear() {
+        store.clear();
     }
 
     @PostConstruct

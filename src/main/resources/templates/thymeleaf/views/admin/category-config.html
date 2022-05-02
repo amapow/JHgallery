@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Janghyeon Jung</title>
+</head>
+<body>
+<h2>카테고리 편집</h2>
+<h3>추가</h3>
+<form id="category-add" th:action="@{/admin/category/add}" method="post" th:object="${addForm}">
+    <span>
+        <label>Title</label>
+        <input type="text" th:field="*{title}"/>
+        <label>Description</label>
+        <input type="text" th:field="*{desc}"/>
+    </span>
+    <br>
+    <input type="submit" value="추가">
+
+</form>
+
+<h3>수정</h3>
+<div>
+    <form id="category-edit" th:action="@{/admin/category/edit}" method="post" th:object="${form}">
+        <div th:each="category: *{categories}">
+            <label th:text="*{categories[__${categoryStat.index}__].title}"></label>
+            <input type="text" th:field="*{categories[__${categoryStat.index}__].title}">
+            <label>Description</label>
+            <input type="text" th:field="*{categories[__${categoryStat.index}__].desc}">
+            <!--            <input type="text" th:field="*{categories[__${itemStat.index}__].desc}">-->
+        </div>
+        <!--        <div>-->
+        <!--            <br>-->
+        <!--            <br>-->
+        <!--            <label>Title</label>-->
+        <!--            <input type="text" th:name="addTitle" value="추가할 Title"/>-->
+        <!--            <label>Description</label>-->
+        <!--            <input type="text" th:name="addDesc" value="추가할 Description"/>-->
+        <!--        </div>-->
+        <input type="submit" value="수정">
+    </form>
+
+</div>
+</body>
+</html>

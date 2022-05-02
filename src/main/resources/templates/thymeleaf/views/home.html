@@ -7,7 +7,7 @@
     <meta name="author" content="Pharaohlab">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- ========== Title ========== -->
-    <category>Janghyeon Jung</category>
+    <title>Janghyeon Jung</title>
     <!-- ========== Favicon Ico ========== -->
     <!--<link rel="icon" href="fav.ico">-->
     <!-- ========== STYLESHEETS ========== -->
@@ -57,7 +57,8 @@
                         <h4 class="side_title"><b>Project</b></h4>
                         <ul id="filtr-container" class="filter_nav">
                             <li data-filter=""><a href="javascript:void(0)">Archive</a></li>
-                            <li th:each="category : ${categories}" th:attr="data-filter=${category.getTitle()}" data-filter="category"><a href="javascript:void(0)">[[${category.getFullTitle()}]]</a></li>
+                            <li th:each="category : ${categories}" th:attr="data-filter=${category.getTitle()}"
+                                data-filter="category"><a href="javascript:void(0)">[[${category.getDesc()}]]</a></li>
                         </ul>
                     </div>
                     <li sec:authorize="hasRole('ROLE_ADMIN')">
