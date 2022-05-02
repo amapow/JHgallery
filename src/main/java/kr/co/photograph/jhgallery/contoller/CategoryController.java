@@ -53,8 +53,8 @@ public class CategoryController {
 
     @PostMapping("add")
     public String categoryConfigAdd(@ModelAttribute(name="addForm") Category addForm) {
-        List<Category> store = categoryRepository.getStore();
-        store.add(addForm);
+        addForm.setTitle("."+addForm.getTitle());
+        categoryRepository.save(addForm);
         return "redirect:/admin/category";
     }
 }
