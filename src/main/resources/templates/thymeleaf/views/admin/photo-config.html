@@ -140,7 +140,7 @@
                     <div class="grid img-container justify-content-center no-gutters">
                         <div class="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
 
-                        <form id="urlSend" th:action="@{/admin/photo/config}" method="POST">
+                        <form id="urlSend" th:action="@{/admin/photo/config}" th:object="${form}" method="POST">
                             <div th:each="myPhoto : ${photoRepository}"
                                  th:classappend="${myPhoto.value.getTitle()}"
                                  class="grid-item col-sm-12 col-md-6 col-lg-3">
@@ -148,12 +148,14 @@
                                     <img th:src="@{${myPhoto.value.getMediumUrl()}}"/>
                                     <span th:each="permission: ${flag}">
                                         <label th:for="${#ids.next('permissionFlag')}" th:text="${permission.value}"></label>
-                                        <input type="radio" th:name="|flag${myPhotoStat.index}|"
-                                               th:attr="checked=${myPhoto.value.getFlag()} == ${permission.name()} ? 'true' : 'false'" th:value="${permission.name()}"/>
+                                        <input type="radio" th:field="*{photoConfig[__${myPhotoStat.index}__].flag}"
+                                               th:attr="checked=${myPhoto.value.getFlag()} == ${permission.name()} ? 'true' : 'false'"
+                                               th:value="${permission.name()}"/>
                                     </span>
                                     <span>
                                         <label th:name="category"></label>
-                                        <input type="text" name="category" th:value="${myPhoto.value.getTitle()}">
+                                        <input type="text" th:field="*{photoConfig[__${myPhotoStat.index}__].title}"
+                                               th:value="${myPhoto.value.title}">
                                     </span>
                                     <br>
                                     <br>

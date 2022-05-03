@@ -2,6 +2,8 @@ package kr.co.photograph.jhgallery.contoller;
 
 import com.flickr4java.flickr.FlickrException;
 import kr.co.photograph.jhgallery.domain.Flag;
+import kr.co.photograph.jhgallery.domain.PhotoConfig;
+import kr.co.photograph.jhgallery.domain.dto.PhotoConfigDto;
 import kr.co.photograph.jhgallery.model.MyPhoto;
 import kr.co.photograph.jhgallery.repository.PhotoRepository;
 import kr.co.photograph.jhgallery.service.flickrservice.FlickrService;
@@ -29,30 +31,23 @@ public class PhotoConfigController {
 
     @GetMapping("photo/config")
     public String configView(Model model) throws FlickrException {
+        model.addAttribute("form", new PhotoConfigDto(photoRepository.returnConfig()));
         model.addAttribute("photoRepository", photoRepository.getPhotoStore());
         model.addAttribute("flag", Flag.values());
-        log.info("photo store size = {}", photoRepository.getPhotoStore().size());
 
         return "/admin/photo-config";
     }
 
     @PostMapping("photo/config")
-    public String configPhoto(@RequestParam String title, HttpServletRequest request) throws FlickrException {
-
-        String[] getTitle = title.split(",");
-        List<String> flag = getFlag(request, getTitle);
-        List<String> titleList = new ArrayList<>();
-        for (String s : getTitle) {
-            titleList.add(s);
+    public String configPhoto(@ModelAttribute("form") PhotoConfigDto form) throws FlickrException {
+        List<PhotoConfig> photoConfigs = photoRepository.returnConfig();
+        for(int i = 0; i < form.getPhotoConfig().size(); i++) {
+            flickrServiceAdmin.config(
+                    photoRepository.findById(photoConfigs.get(i).getPhotoId()),
+                    form.getPhotoConfig().get(i).getTitle(),
+                    form.getPhotoConfig().get(i).getFlag().getValue());
         }
-        Map<Integer, MyPhoto> photoStore = photoRepository.getPhotoStore();
-        int i = 0;
-        for (MyPhoto value : photoStore.values()) {
-            flickrServiceAdmin.config(value, titleList.get(i), flag.get(i), photoStore);
-            i++;
-        }
-        photoServiceAdmin.refreshPhotoList();
-        return "/admin/photo-config";
+        return "redirect:/admin/photo/config";
     }
 
     private List<String> getFlag(HttpServletRequest request, String[] getTitle) {

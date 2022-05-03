@@ -11,6 +11,7 @@ import kr.co.photograph.jhgallery.domain.Flag;
 import kr.co.photograph.jhgallery.model.MyPhoto;
 import kr.co.photograph.jhgallery.repository.PhotoRepository;
 import kr.co.photograph.jhgallery.service.authservice.FlickrAuthService;
+import kr.co.photograph.jhgallery.service.photoservice.PhotoService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ import java.util.Map;
 public class FlickerServiceAdmin implements FlickrService {
     private final Flickr flickr;
     private final FlickrAuthService flickrAuthService;
+    private final PhotoService photoServiceAdmin;
 
     @Override
     public void upload(String fileName, String title, String flag) throws FlickrException{
@@ -53,7 +55,7 @@ public class FlickerServiceAdmin implements FlickrService {
     }
 
     @Override
-    public void config(MyPhoto myPhoto, String title, String flag, Map<Integer, MyPhoto> photoStore) throws FlickrException {
+    public void config(MyPhoto myPhoto, String title, String flag) throws FlickrException {
         Permissions permFlag = new Permissions();
         if (flag.equals(Flag.PUBLIC.toString())) {
             permFlag.setPublicFlag(true);
@@ -66,12 +68,11 @@ public class FlickerServiceAdmin implements FlickrService {
             log.info("photo title={}", myPhoto.getTitle());
             log.info("flag={}", flag);
             log.info("myPhoto = {}", myPhoto);
-            log.info("photoStore size = {}", photoStore.size());
             log.info("title config found = {}", myPhoto.getMediumUrl());
             flickr.getFlickr().getPhotosInterface().setMeta(myPhoto.getId(), title, "");
             flickr.getFlickr().getPhotosInterface().setPerms(myPhoto.getId(), permFlag);
+            photoServiceAdmin.refreshPhotoList();
         }
-
 
     }
 }

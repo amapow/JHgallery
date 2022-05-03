@@ -13,7 +13,7 @@
             <img th:src="|images/*{storePhotoName}|" width="400" height="300"/>
             <span>
                 <label>Title</label>
-                <input type="text" th:name="category" th:value="*{category}"/>
+                <input type="text" th:name="title" th:value="*{title}"/>
             </span>
             <span th:each="permission: ${flag}">
                 <label th:for="${#ids.next('permissionFlag')}" th:text="${permission.value}"></label>

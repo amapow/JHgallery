@@ -1,5 +1,7 @@
 package kr.co.photograph.jhgallery.repository;
 
+import kr.co.photograph.jhgallery.domain.Flag;
+import kr.co.photograph.jhgallery.domain.PhotoConfig;
 import kr.co.photograph.jhgallery.model.MyPhoto;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,14 @@ public class PhotoRepository {
             }
         }
         return null;
+    }
+
+    public List<PhotoConfig> returnConfig() {
+        List<PhotoConfig> photoConfig = new ArrayList<>();
+        for (MyPhoto value : photoStore.values()) {
+            photoConfig.add(new PhotoConfig(value.getId(), value.getTitle(), Flag.valueOf(value.getFlag())));
+        }
+        return photoConfig;
     }
 
     public void clear() {

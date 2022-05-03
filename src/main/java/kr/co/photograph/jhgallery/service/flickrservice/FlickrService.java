@@ -11,5 +11,5 @@ public interface FlickrService {
     void upload(String fileName, String title, String flag) throws FlickrException;
     void delete(ArrayList<String> deleteItem) throws FlickrException;
 
-    void config(MyPhoto myPhoto, String title, String flag, Map<Integer, MyPhoto> photoStore) throws FlickrException;
+    void config(MyPhoto myPhoto, String title, String flag) throws FlickrException;
 }
