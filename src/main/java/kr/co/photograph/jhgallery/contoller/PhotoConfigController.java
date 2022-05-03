@@ -4,20 +4,18 @@ import com.flickr4java.flickr.FlickrException;
 import kr.co.photograph.jhgallery.domain.Flag;
 import kr.co.photograph.jhgallery.domain.PhotoConfig;
 import kr.co.photograph.jhgallery.domain.dto.PhotoConfigDto;
-import kr.co.photograph.jhgallery.model.MyPhoto;
 import kr.co.photograph.jhgallery.repository.PhotoRepository;
 import kr.co.photograph.jhgallery.service.flickrservice.FlickrService;
-import kr.co.photograph.jhgallery.service.photoservice.PhotoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,7 +25,6 @@ public class PhotoConfigController {
 
     private final PhotoRepository photoRepository;
     private final FlickrService flickrServiceAdmin;
-    private final PhotoService photoServiceAdmin;
 
     @GetMapping("photo/config")
     public String configView(Model model) throws FlickrException {
@@ -48,14 +45,5 @@ public class PhotoConfigController {
                     form.getPhotoConfig().get(i).getFlag().getValue());
         }
         return "redirect:/admin/photo/config";
-    }
-
-    private List<String> getFlag(HttpServletRequest request, String[] getTitle) {
-
-        List<String> getFlag = new ArrayList<>();
-        for (int i = 0; i < getTitle.length; i++) {
-            getFlag.add(request.getParameter("flag" + i));
-        }
-        return getFlag;
     }
 }

@@ -12,12 +12,13 @@ public class UploadPhoto {
     private String storePhotoName;
     private String uploadPhotoPath;
     private String title;
-    private String permissionFlag;
+    private Flag flag;
 
-    public UploadPhoto(String uploadPhotoName, String storePhotoName, String uploadPhotoPath) {
+    public UploadPhoto(String uploadPhotoName, String storePhotoName, String uploadPhotoPath, Flag flag) {
         this.uploadPhotoName = uploadPhotoName;
         this.storePhotoName = storePhotoName;
         this.uploadPhotoPath = uploadPhotoPath;
+        this.flag = flag;
     }
 
     public UploadPhoto() {

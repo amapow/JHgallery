@@ -1,5 +1,6 @@
 package kr.co.photograph.jhgallery.file;
 
+import kr.co.photograph.jhgallery.domain.Flag;
 import kr.co.photograph.jhgallery.domain.UploadPhoto;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +40,7 @@ public class FileStore {
         String originalPhotoName = multipartFile.getOriginalFilename();
         String storePhotoName = createStorePhotoName(originalPhotoName);
         multipartFile.transferTo(new File(getFullPath(storePhotoName)));
-        return new UploadPhoto(originalPhotoName, storePhotoName, getFullPath(storePhotoName));
+        return new UploadPhoto(originalPhotoName, storePhotoName, getFullPath(storePhotoName), Flag.PUBLIC);
     }
 
     private String createStorePhotoName(String originalFilename) {

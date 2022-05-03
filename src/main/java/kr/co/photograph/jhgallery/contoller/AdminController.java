@@ -47,7 +47,6 @@ public class AdminController {
 
     @PostMapping("auth")
     public String getAuth(@RequestParam("token") String token) throws FlickrException {
-        System.out.println(token);
         flickrAuthService.authorize(token);
         photoServiceAdmin.refreshPhotoList();
         return "redirect:/admin";

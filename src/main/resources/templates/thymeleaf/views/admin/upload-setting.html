@@ -8,17 +8,20 @@
     <div class="py-5 text-center">
         <h2>사진 설정</h2>
     </div>
-    <form th:action="@{upload/setting}" method="post">
-        <div th:each="photo : ${photos.uploadPhotos}" th:object="${photo}">
-            <img th:src="|images/*{storePhotoName}|" width="400" height="300"/>
+    <form th:action="@{upload/setting}" method="post" th:object="${photos}">
+        <div th:each="photo : ${photos.uploadPhotos}">
+            <img th:src="|images/${photo.storePhotoName}|" width="400" height="300"/>
             <span>
                 <label>Title</label>
-                <input type="text" th:name="title" th:value="*{title}"/>
+                <input type="text" th:field="*{uploadPhotos[__${photoStat.index}__].title}"/>
             </span>
             <span th:each="permission: ${flag}">
                 <label th:for="${#ids.next('permissionFlag')}" th:text="${permission.value}"></label>
-                <input type="radio" th:attr="checked=${permission.name()} == 'PUBLIC' ? 'true' : 'false'"
-                       th:name="|flag${photoStat.index}|" th:value="${permission.name()}"/>
+                <input type="radio"
+                       th:value="${permission.value}"
+                       th:attr="checked=${permission.value} == 'PUBLIC' ? 'true' : 'false'"
+                       th:field="*{uploadPhotos[__${photoStat.index}__].flag}"
+                />
             </span>
 
         </div>
